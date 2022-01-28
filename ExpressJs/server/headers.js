@@ -5,12 +5,15 @@ function logRequest({ method, url }) {
 }
 
 const server = http.createServer((req, res) => {
+  logRequest(req);
   if (req.url === '/headers') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(req.headers));
-  } else {
-    res.writeHead(404, 'Not Found');
-    res.end()
+  }
+
+  if (req.url === '/plural') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(req.params.number));
   }
 })
 
