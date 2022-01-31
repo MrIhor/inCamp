@@ -103,7 +103,7 @@ const server = net.createServer((socket) => {
       } else {
         playerO.write('Добро пожаловать в игру Крестики | Нолики');
         playerO.write(gameBoard(updateLayout));
-        playerO.write(`\nВы играете за O\n`);
+        playerO.write(`\nВы играете за O\nОжидайте хода противника\n`);
       }
     })
   }

@@ -1,5 +1,17 @@
 {
   "dependencies": {
     "url-parse": "^1.5.4"
+  },
+  "name": "server",
+  "version": "1.0.0",
+  "main": "http.js",
+  "scripts": {
+    "start": "nodemon http.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
