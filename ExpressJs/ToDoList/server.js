@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 5000;
 const rootUrl = '/api';
+
 function logRequest({ method, url }, res, next) {
   console.log(`[${new Date().toISOString()}] ${method} ${url}`);
   next();
