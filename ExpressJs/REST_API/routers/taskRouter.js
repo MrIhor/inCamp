@@ -2,13 +2,19 @@ const router = require('express').Router();
 const controller = require('../controllers/TaskController');
 
 router.get('/:id/tasks', (req, res) => {
-    const taskId = parseInt(req.params.id);
-    const tasks = controller.getTask(taskId);
+    const listId = parseInt(req.params.id);
+    const tasks = controller.getTask(listId);
     res.status(200);
     res.send(tasks);
     res.end();
 })
 
-router.get()
+router.get('', (req, res) => {
+    const listId = req.query.listId; 
+    const tasks = controller.getTask(listId);
+    res.status(200);
+    res.send(tasks);
+    res.end(); 
+}) 
 
 module.exports = router;
