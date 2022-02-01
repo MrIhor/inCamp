@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { query } = require('express');
 const controller = require('../controllers/TaskController');
 
 router.get('', (req, res) => {
@@ -25,6 +26,16 @@ router.delete('', (req, res) => {
     res.status(202);
     res.send(newTasksList);
     res.end();
+})
+
+router.patch('/:id', (req, res) => {
+    const listId = parseInt(req.query.listId); 
+    const taskId = parseInt(req.params.id); 
+
+    const updateTask = controller.updateTask(listId, taskId, req.body);
+    res.status(204);
+    res.send(updateTask); 
+    res.end(); 
 })
 
 module.exports = router;

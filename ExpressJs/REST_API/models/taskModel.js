@@ -26,6 +26,18 @@ const deleteTask = (listId, taskId) => {
     return currentList.tasks.splice(taskId - 1, 1);
 }
 
+const updateTask = (listId, taskId, data) => {
+    const tasks = list[listId - 1].tasks;
+    const task = tasks.find(t => t.id === (taskId - 1));
+
+    if(task) {
+        Object.assign(task, data);
+        return tasks;
+    }
+
+    return tasks;
+}
 
 
-module.exports = {getTask, createTask, deleteTask};
+
+module.exports = {getTask, createTask, deleteTask, updateTask};
