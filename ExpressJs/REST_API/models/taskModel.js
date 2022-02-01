@@ -1,8 +1,7 @@
 const list = require('../List/ListTasks.json');
 
-const inc = (init = 2) => () => ++init;
-const generateId = inc();
-
+const taskInc = (init = 2) => () => ++init;
+const generateTaskId = taskInc();
 
 const getTask = id => {
     const listId = list[id - 1];
@@ -11,7 +10,7 @@ const getTask = id => {
 
 const createTask = (id, data) => {
     const task = {
-        id: generateId(),
+        id: generateTaskId(),
         title: data.title, 
         done: false
     }
@@ -26,5 +25,7 @@ const deleteTask = (listId, taskId) => {
     
     return currentList.tasks.splice(taskId - 1, 1);
 }
+
+
 
 module.exports = {getTask, createTask, deleteTask};
