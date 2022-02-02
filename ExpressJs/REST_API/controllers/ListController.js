@@ -1,4 +1,4 @@
-const listModel = require('../models/index');
+const listModel = require('../models');
 
 class ListController {
     getAll() {

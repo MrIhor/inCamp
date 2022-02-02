@@ -35,8 +35,8 @@ router.post('/:id/tasks', (req, res) => {
     checkStatus(tasks, res, 201, 400);
 })
 
-router.delete('', (req, res) => {
-    const listId = parseToNumber(req.body.id);
+router.delete('/:listId', (req, res) => {
+    const listId = parseToNumber(req.params.listId);
     const newList = controller.deleteList(listId);
     checkStatus(newList, res, 202, 400);
 })

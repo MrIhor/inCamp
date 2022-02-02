@@ -1,11 +1,5 @@
 let list = require('../List/ListTasks.json');
 
-const listInc = (init = 2) => () => ++init;
-const generateListId = listInc();
-
-const taskInc = (init = 2) => () => ++init;
-const generateTaskId = taskInc();
-
 function getId(array, currentId) {
     return array.find(element => element.id === currentId)
 }
@@ -15,10 +9,10 @@ const getAll = () => {
 }
 
 const getTask = taskId => {
-    const currentTaskId = getId(list, taskId);
+    const currentListId = getId(list, taskId);
     
     if(currentTaskId) {
-        return currentTaskId.tasks;
+        return currentListId.tasks;
     }
     
     return undefined;
@@ -36,7 +30,7 @@ const getList = listId => {
 
 const createList = (data) => {
     const newList = {
-        id: generateListId(),
+        id: list.length + 1,
         listTitle: data.title, 
         tasks: []
     }
@@ -48,14 +42,14 @@ const createList = (data) => {
 const createTask = (listId, data) => {
     const currentList = getId(list, listId);
     const task = {
-        id: generateTaskId(),
+        id: currentList.tasks.length + 1,
         title: data.title, 
         done: false
     }
 
     if (currentList) {
         currentList.tasks.push(task);
-        return currentList.tasks;
+        return task;
     }
  
     return undefined;
@@ -90,8 +84,8 @@ const deleteTask = (listId, taskId) => {
 } 
 
 const updateTask = (listId, taskId, data) => {
-    const lists = getId(list, listId).tasks; 
-    const task = getId(lists, taskId);
+    const currentListTasks = getId(list, listId).tasks; 
+    const task = getId(currentListTasks, taskId);
 
     if(task) {
         task.taskTitle = data.title;
@@ -114,12 +108,12 @@ const updateList = (listId, data) => {
 }
 
 const updateFullTask = (listId, taskId, data) => {
-    const lists = getId(list, listId).tasks; 
-    const task = getId(lists, taskId);
+    const currentListTasks = getId(list, listId).tasks; 
+    const task = getId(currentListTasks, taskId);
 
     if(task) {
         const updatedTask = {
-            id: generateTaskId(),
+            id: currentListTasks.length + 1,
             taskTitle: data.title,
             done: false
         }
@@ -136,7 +130,7 @@ const updateFullList = (listId, data) => {
 
     if (currentList) {
         const updatedList = {
-            id: generateListId(),
+            id: list.length + 1,
             listTitle: data.title,
             tasks: []
         }
