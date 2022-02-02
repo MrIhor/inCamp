@@ -7,7 +7,7 @@ function parseToNumber(string) {
 
 router.get('', (req, res) => {
     const listId = parseToNumber(req.query.listId); 
-    
+
     const tasks = controller.getTask(listId);
     checkStatus(tasks, res, 200, 404);
 })
@@ -24,7 +24,7 @@ router.delete('', (req, res) => {
     const taskId = parseToNumber(req.body.id);  
 
     const newTasksList = controller.deleteTask(listId, taskId);
-    checkStatus(newTasksList, res, 202, 400);
+    checkStatus(newTasksList, res, 202, 400); 
 })
 
 router.patch('/:id', (req, res) => {
