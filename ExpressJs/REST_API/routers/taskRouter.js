@@ -3,7 +3,7 @@ const { query } = require('express');
 const controller = require('../controllers/TaskController');
 
 router.get('', (req, res) => {
-    const listId = req.query.listId; 
+    const listId = parseInt(req.query.listId); 
     const tasks = controller.getTask(listId);
     res.status(200);
     res.send(tasks);
@@ -33,9 +33,19 @@ router.patch('/:id', (req, res) => {
     const taskId = parseInt(req.params.id); 
 
     const updateTask = controller.updateTask(listId, taskId, req.body);
-    res.status(204);
+    res.status(200);
     res.send(updateTask); 
     res.end(); 
+})
+
+router.put('/:id', (req, res) => {
+    const listId = parseInt(req.query.listId); 
+    const taskId = parseInt(req.params.id);
+
+    const updateFullTask = controller.updateFullTask(listId, taskId, req.body);
+    res.status(200);
+    res.send(updateFullTask);
+    res.end();
 })
 
 module.exports = router;

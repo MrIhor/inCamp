@@ -9,12 +9,16 @@ class TaskController {
         return taskModel.createTask(id, data);
     }
 
+    deleteTask(listId, taskId) {
+        return taskModel.deleteTask(listId, taskId);
+    }
+
     updateTask(listId, taskId, data) {
         return taskModel.updateTask(listId, taskId, data);
     }
 
-    deleteTask(listId, taskId) {
-        return taskModel.deleteTask(listId, taskId);
+    updateFullTask(listId, taskId, data) {
+        return taskModel.updateFullTask(listId, taskId, data); 
     }
 }
 

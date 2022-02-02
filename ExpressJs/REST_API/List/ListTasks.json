@@ -1,31 +1,31 @@
 [
     {
-        "listId": 1,
+        "id": 1,
         "listTitle": "First list",
         "tasks": [
             {
-                "taskId": 1,
+                "id": 1,
                 "taskTitle": "First task for 1 list",
                 "done": false
             },
             {
-                "taskId": 2,
+                "id": 2,
                 "taskTitle": "Second task for 1 list",
                 "done": false
             }
         ]
     },
     {
-        "listId": 2,
+        "id": 2,
         "listTitle": "Second list",
         "tasks": [
             {
-                "taskId": 1,
+                "id": 1,
                 "taskTitle": "First task for 2 list",
                 "done": false
             },
             {
-                "taskId": 2,
+                "id": 2,
                 "taskTitle": "Second task for 2 list",
                 "done": false
             }

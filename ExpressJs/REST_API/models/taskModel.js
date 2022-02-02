@@ -4,40 +4,57 @@ const taskInc = (init = 2) => () => ++init;
 const generateTaskId = taskInc();
 
 const getTask = id => {
-    const listId = list[id - 1];
+    const listId = list.find(l => l.id === id);
     return listId.tasks;
 }
 
-const createTask = (id, data) => {
+const createTask = (listId, data) => {
     const task = {
         id: generateTaskId(),
         title: data.title, 
         done: false
     }
 
-    const listId = list[id - 1];
-    listId.tasks.push(task);
-    return listId.tasks;
+    const currentList = list.find(l => l.id === listId);
+    currentList.tasks.push(task);
+    return currentList.tasks;
 }
 
 const deleteTask = (listId, taskId) => {
-    const currentList = list[listId - 1];
+    const currentList = list.find(l => l.id === listId);
     
     return currentList.tasks.splice(taskId - 1, 1);
 }
 
 const updateTask = (listId, taskId, data) => {
-    const tasks = list[listId - 1].tasks;
-    const task = tasks.find(t => t.id === (taskId - 1));
+    const lists = list.find(l => l.id === listId).tasks; 
+    const task = lists.find(t => t.id === taskId);
 
     if(task) {
-        Object.assign(task, data);
-        return tasks;
+        task.taskTitle = data.title;
+        task.done = data.done;
+        return task;
     }
 
-    return tasks;
+    return task;
 }
 
+const updateFullTask = (listId, taskId, data) => {
+    const lists = list.find(l => l.id === listId).tasks;
+    const task = lists.find(t => t.id === taskId);
+    
+    if(task) {
+        const updatedTask = {
+            id: generateTaskId(),
+            taskTitle: data.title,
+            done: false
+        }
 
+        Object.assign(task, updatedTask);
+        return task;
+    }
 
-module.exports = {getTask, createTask, deleteTask, updateTask};
+    return task;
+}
+
+module.exports = {getTask, createTask, deleteTask, updateTask, updateFullTask};
