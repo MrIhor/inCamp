@@ -1,4 +1,4 @@
-const list = require('../List/ListTasks.json');
+let list = require('../List/ListTasks.json');
 
 const listInc = (init = 2) => () => ++init;
 const generateListId = listInc();
@@ -6,18 +6,32 @@ const generateListId = listInc();
 const taskInc = (init = 2) => () => ++init;
 const generateTaskId = taskInc();
 
+function getId(array, currentId) {
+    return array.find(element => element.id === currentId)
+}
+
 const getAll = () => {
     return list;
 }
 
 const getTask = taskId => {
-    const listId = list.find(l => l.id === taskId); 
-    return listId.tasks;
+    const currentTaskId = getId(list, taskId);
+    
+    if(currentTaskId) {
+        return currentTaskId.tasks;
+    }
+    
+    return undefined;
 }
 
 const getList = listId => {
-    const currentList = list.find(l => l.id === listId);
-    return currentList;
+    const currentList = getId(list, listId);
+
+    if(currentList) {
+        return currentList;
+    }
+
+    return undefined;
 }
 
 const createList = (data) => {
@@ -32,30 +46,52 @@ const createList = (data) => {
 }  
 
 const createTask = (listId, data) => {
-    const currentList = list.find(l => l.id === listId);
+    const currentList = getId(list, listId);
     const task = {
         id: generateTaskId(),
         title: data.title, 
         done: false
     }
+
+    if (currentList) {
+        currentList.tasks.push(task);
+        return currentList.tasks;
+    }
  
-    currentList.tasks.push(task);
-    return currentList.tasks;
+    return undefined;
 }
 
 const deleteList = (listId) => {
-    return list.splice(listId - 1, 1); 
-}
+    const currentList = getId(list, listId);
+
+    if (currentList) {
+        const deleteList = list.filter(l => l.id !== listId);
+        return list = deleteList;
+    }
+     
+    return undefined;
+} 
   
 const deleteTask = (listId, taskId) => {
-    const currentList = list.find(l => l.id === listId);
-    
-    return currentList.tasks.splice(taskId - 1, 1);
-}
+    let currentList = getId(list, listId);
+
+    if (currentList) {
+        const task = currentList.tasks.find(t => t.id === taskId);
+
+        if (task) {
+            const deleteTask = currentList.tasks.filter(element => element.id !== taskId);
+            return currentList.tasks = deleteTask;
+        }
+         
+        return undefined; 
+    }
+     
+    return undefined;
+} 
 
 const updateTask = (listId, taskId, data) => {
-    const lists = list.find(l => l.id === listId).tasks; 
-    const task = lists.find(t => t.id === taskId);
+    const lists = getId(list, listId).tasks; 
+    const task = getId(lists, taskId);
 
     if(task) {
         task.taskTitle = data.title;
@@ -63,23 +99,23 @@ const updateTask = (listId, taskId, data) => {
         return task;
     }
 
-    return lists;
+    return undefined;
 }
 
 const updateList = (listId, data) => {
-    const currentList = list.find(l => l.id === listId);
+    const currentList = getId(list, listId);
 
     if (currentList) {
         currentList.listTitle = data.title;
         return currentList;
     }
 
-    return currentList;
+    return undefined;
 }
 
 const updateFullTask = (listId, taskId, data) => {
-    const lists = list.find(l => l.id === listId).tasks; 
-    const task = lists.find(t => t.id === taskId);
+    const lists = getId(list, listId).tasks; 
+    const task = getId(lists, taskId);
 
     if(task) {
         const updatedTask = {
@@ -92,11 +128,11 @@ const updateFullTask = (listId, taskId, data) => {
         return task;
     }
 
-    return task;
+    return undefined;
 }
 
 const updateFullList = (listId, data) => {
-    const currentList = list.find(l => l.id === listId);
+    const currentList = getId(list, listId);
 
     if (currentList) {
         const updatedList = {
@@ -109,7 +145,7 @@ const updateFullList = (listId, data) => {
         return currentList;
     }
 
-    return currentList; 
+    return undefined; 
 }
 
 module.exports = {getAll, getTask, getList, createTask, createList, deleteList, deleteTask, updateTask, updateList, updateFullTask, updateFullList};

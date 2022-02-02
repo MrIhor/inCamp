@@ -1,34 +1,59 @@
-const list = require('../List/ListTasks.json');
+const lists = require('../List/ListTasks.json');
 
 const taskInc = (init = 2) => () => ++init;
 const generateTaskId = taskInc();
 
+function getId(array, currentId) {
+    return array.find(element => element.id === currentId)
+}
+
 const getTask = id => {
-    const listId = list.find(l => l.id === id);
-    return listId.tasks;
+    const listId = getId(lists, id);
+
+    if(listId) {
+        return listId.tasks;
+    }
+
+    return undefined;
 }
 
 const createTask = (listId, data) => {
+    const currentList = getId(lists, listId);
+
     const task = {
-        id: generateTaskId(),
+        id: currentList.tasks.length + 1,
         title: data.title, 
         done: false
     }
 
-    const currentList = list.find(l => l.id === listId);
-    currentList.tasks.push(task);
-    return currentList.tasks;
+    if (currentList) {
+        currentList.tasks.push(task);
+        return currentList.tasks;
+    }
+     
+    return undefined;
 }
 
 const deleteTask = (listId, taskId) => {
-    const currentList = list.find(l => l.id === listId);
-    
-    return currentList.tasks.splice(taskId - 1, 1);
+    let currentList = getId(lists, listId);
+
+    if (currentList) {
+        const task = getId(currentList.tasks, taskId);
+
+        if (task) {
+            const deleteTask = currentList.tasks.filter(element => element.id !== taskId);
+            return currentList.tasks = deleteTask;
+        }
+         
+        return undefined;
+    }
+     
+    return undefined;
 }
 
 const updateTask = (listId, taskId, data) => {
-    const lists = list.find(l => l.id === listId).tasks; 
-    const task = lists.find(t => t.id === taskId);
+    const currentList = getId(lists, listId).tasks; 
+    const task = getId(currentList, taskId);
 
     if(task) {
         task.taskTitle = data.title;
@@ -36,16 +61,16 @@ const updateTask = (listId, taskId, data) => {
         return task;
     }
 
-    return task;
+    return undefined;
 }
 
 const updateFullTask = (listId, taskId, data) => {
-    const lists = list.find(l => l.id === listId).tasks;
-    const task = lists.find(t => t.id === taskId);
+    const currentList = getId(lists, listId).tasks;
+    const task = getId(currentList, taskId);
     
     if(task) {
         const updatedTask = {
-            id: generateTaskId(),
+            id: currentList.length,
             taskTitle: data.title,
             done: false
         }
@@ -54,7 +79,7 @@ const updateFullTask = (listId, taskId, data) => {
         return task;
     }
 
-    return task;
+    return undefined;
 }
 
 module.exports = {getTask, createTask, deleteTask, updateTask, updateFullTask};
