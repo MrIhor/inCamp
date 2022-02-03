@@ -8,4 +8,9 @@ const pool = new Pool({
     database: 'todolist'
 });
 
-module.exports = pool;
+async function getEmployees(req, res) {
+    const employees = await pool.query('select * from employees');
+    return employees.rows;
+}
+
+module.exports = getEmployees;
