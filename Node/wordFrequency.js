@@ -23,6 +23,13 @@ function mostFrequent(object) {
 }
 
 mostFrequent(wordFrequency('Little red fox jumps over logs. Fox is red'));
+var today = new Date();
+var year = today.getUTCFullYear();
+var month = today.getUTCMonth() + 1;
+var time = today.getUTCHours();
+var day = today.getUTCDate();
+
+console.log(year, month, day, time, today);
 
 
 
