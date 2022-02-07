@@ -5,9 +5,15 @@ async function createTask(req, res) {
     const done = false;
     const date = new Date();
 
-    const newTask = await db.query('insert into todos (title, done, due_date, list_id) values ($1, $2, $3, $4) returning *',
-        [title, done, date, listId]);
-    res.json(newTask.rows[0]);
+    const list = await db.query('select * from lists where id=$1', [listId]);
+
+    if (list.rows[0]) {
+        const newTask = await db.query('insert into todos (title, done, due_date, list_id) values ($1, $2, $3, $4) returning *',
+            [title, done, date, listId]);
+        res.json(newTask.rows[0]);
+    } else {
+        res.json("You don't have list with this id");
+    }
 }
 
 async function getAllTasks(req, res) {

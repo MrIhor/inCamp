@@ -4,8 +4,7 @@ create table todos(
     done boolean not null,
     due_date date,
     list_id int not null,
-    primary key (id),
-    foreign key (list_id) references lists (id)
+    primary key (id)
 );
 
 create table lists(

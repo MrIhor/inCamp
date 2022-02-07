@@ -23,15 +23,23 @@ async function getList(req, res) {
 
 async function getTasksInList(req, res) {
   const { id } = req.params;
+  const { all } = req.query;
 
-  const listTasks = await db.query('select * from todos where list_id=$1', [id]);
-
-  if (listTasks.rows[0]) {
-    res.json(listTasks.rows);
+  if (all) {
+    const allListTasks = await db.query('select * from todos where list_id=$1', [id]);
+    if (allListTasks.rows[0]) {
+      res.json(allListTasks.rows);
+    } else {
+      res.json("Tasks in this list not found");
+    }
   } else {
-    res.json("Tasks in this list not found");
+    const filterTask = await db.query('select * from todos where list_id=$1 and done=false', [id]);
+    if (filterTask.rows[0]) {
+      res.json(filterTask.rows);
+    } else {
+      res.json("Tasks in this list not found");
+    }
   }
-
 }
 
 async function createList(req, res) {
