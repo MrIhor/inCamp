@@ -9,6 +9,10 @@ class TaskController {
         return taskModule.getAllTasks(req, res);
     }
 
+    getTask(req, res) {
+        return taskModule.getTask(req, res);
+    }
+
     deleteTask(req, res) {
         return taskModule.deleteTask(req, res);
     }
