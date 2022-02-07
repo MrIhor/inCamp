@@ -16,23 +16,23 @@ async function getAllTasks(req, res) {
 }
 
 async function getTask(req, res) {
-    const { id } = req.params;
+    const { listId, taskId } = req.params;
 
-    const task = await db.query('select * from todos where id=$1', [id]);
+    const task = await db.query('select * from todos where id=$1 and list_id=$2', [taskId, listId]);
 
     if (task.rows[0]) {
         res.json(task.rows[0]);
     } else {
-        res.json("You don't have task with this id");
+        res.json("Task not found");
     }
 }
 
 async function deleteTask(req, res) {
-    const { taskId } = req.body;
-    const task = await db.query('select * from todos where id=$1', [taskId]);
+    const { id } = req.params;
+    const task = await db.query('select * from todos where id=$1', [id]);
 
     if (task.rows[0]) {
-        const deletedTask = await db.query('delete from todos where id=$1 returning *', [taskId]);
+        const deletedTask = await db.query('delete from todos where id=$1 returning *', [id]);
         res.json(deletedTask.rows[0]);
     } else {
         res.json("You don't have task with this id");
@@ -40,21 +40,27 @@ async function deleteTask(req, res) {
 }
 
 async function editTask(req, res) {
-    const { title, done } = req.body;
-    const id = req.params.id;
+    const { id } = req.params;
+    const { title, done, date } = req.body;
 
-    const task = await db.query('select * from todos where id=$1', [id]);
+    const task = await db.query("SELECT * FROM todos where id = $1", [id]);
 
     if (task.rows[0]) {
-        if (title && done) {
-            const editedTask = await db.query('update todos set title=$1, done=$2 where id=$3 returning *', [title, done, id]);
-            res.json(editedTask.rows[0]);
-        } else if (title) {
-            const editedTask = await db.query('update todos set title=$1 where id=$2 returning *', [title, id]);
-            res.json(editedTask.rows[0]);
+        const currentTask = task.rows[0];
+        const newTask = await db.query(
+            "UPDATE todos set title=$2, done=$3, due_date=$4 where id=$1 RETURNING *",
+            [
+                id,
+                title ? title : currentTask.title,
+                done ? done : currentTask.done,
+                date ? date : currentTask.due_data
+            ]
+        );
+
+        if (newTask.rows[0]) {
+            res.json(newTask.rows[0]);
         } else {
-            const editedTask = await db.query('update todos set done=$1 where id=$2 returning *', [done, id]);
-            res.json(editedTask.rows[0]);
+            res.json("You don't have task with this id");
         }
     } else {
         res.json("You don't have task with this id");

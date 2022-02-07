@@ -1,21 +1,84 @@
 const db = require('../db');
 
 async function getAllLists(req, res) {
-  const { id } = req.params;
-  const tasksList = await db.query('select * from lists');
-  res.json(tasksList.rows);
-}
+  const list = await db.query('select * from lists');
 
-async function getList(req, res) {
-  const { id } = req.params.id;
-  const listIsExist = await db.query('select * from lists where id=$1', [id]);
-
-  if (listIsExist.rows[0]) {
-    const list = ('select * from lists as l left join todos as t on(l.$1=t.list_id)', [id]);
-    res.json(list);
+  if (list.rows) {
+    res.json(list.rows);
   } else {
-    res.json("You don't have list with this id");
+    res.json("You don't have any list");
   }
 }
 
-module.exports = { getAllLists, getList };
+async function getList(req, res) {
+  const { id } = req.params;
+  const currentList = await db.query('select * from lists where id=$1', [id]);
+
+  if (currentList.rows) {
+    res.json(currentList.rows);
+  } else {
+    res.json("List not found");
+  }
+}
+
+async function getTasksInList(req, res) {
+  const { id } = req.params;
+
+  const listTasks = await db.query('select * from todos where list_id=$1', [id]);
+
+  if (listTasks.rows[0]) {
+    res.json(listTasks.rows);
+  } else {
+    res.json("Tasks in this list not found");
+  }
+
+}
+
+async function createList(req, res) {
+  const { title } = req.body;
+
+  const newList = await db.query('insert into lists (title) values ($1) returning *', [title]);
+  res.json(newList.rows[0]);
+}
+
+async function editList(req, res) {
+  const { title } = req.body;
+  const { id } = req.params;
+
+  const editedList = await db.query('update lists set title=$1 where id=$2 returning *', [title, id]);
+
+  if (editedList.rows[0]) {
+    res.json(editedList.rows[0]);
+  } else {
+    res.json("List not found");
+  }
+}
+
+async function updateList(req, res) {
+  const { id } = req.params;
+  const { title } = req.body;
+
+  const list = await db.query('select * from lists where id=$1', [id]);
+
+  if (list.rows[0]) {
+    await db.query('delete from lists where id=$1 returning *', [id]);
+
+    const updatedList = await db.query('insert into lists (title) values ($1) returning *', [title]);
+    res.json(updatedList.rows);
+  } else {
+    res.json("List not found");
+  }
+}
+
+async function deleteList(req, res) {
+  const { id } = req.params;
+
+  const list = await db.query('select * from lists where id=$1', [id]);
+
+  if (list.rows[0]) {
+    const deletedList = await db.query('delete from lists where id=$1 returning *', [id]);
+    res.json(deletedList.rows[0]);
+  }
+}
+
+module.exports = { getAllLists, getList, createList, editList, getTasksInList, updateList, deleteList };
