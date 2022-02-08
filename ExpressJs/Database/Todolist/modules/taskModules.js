@@ -1,9 +1,8 @@
 const db = require('../db');
 
 async function createTask(req, res) {
-    const { title, listId } = req.body;
+    const { title, listId, date } = req.body;
     const done = false;
-    const date = new Date();
 
     const list = await db.query('select * from lists where id=$1', [listId]);
 
@@ -74,9 +73,8 @@ async function editTask(req, res) {
 }
 
 async function updateTask(req, res) {
-    const { title, listId } = req.body;
+    const { title, listId, date } = req.body;
     const id = req.params.id;
-    const date = new Date();
 
     const task = await db.query('select * from todos where id=$1', [id]);
 
