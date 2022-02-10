@@ -62,9 +62,6 @@ function getData(data, index) {
                     )})`
                 );
             });
-        } else {
-            console.log(`${monthName[month]} ${currentYear}`);
-            console.log("В этом месяце нет именинников");
         }
     }
 }

@@ -45,7 +45,7 @@ async function getTasksInList(req, res) {
 async function createList(req, res) {
   const { title } = req.body;
 
-  const newList = await db.query('insert into lists (title) values ($1) returning *', [title]);
+  const newList = await db.query('insert into lists (listname) values ($1) returning *', [title]);
   res.json(newList.rows[0]);
 }
 
