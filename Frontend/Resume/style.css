@@ -45,32 +45,32 @@ aside {
   margin-bottom: 15px;
 }
 
-.social_list {
+.social-list {
   margin: 20px;
 }
 
-.social_list h2 {
+.social-list h2 {
   padding: 10px 0;
 }
 
-.social_list img {
+.social-list img {
   width: 30px;
 }
 
-.social_list a {
+.social-list a {
   padding: 10px 15px;
 }
 
-.skill_list {
+.skill-list {
   margin: 20px;
 }
 
-.skill_list h2 {
+.skill-list h2 {
   padding: 10px 0;
   clear: left;
 }
 
-.skill_list ul li {
+.skill-list ul li {
   padding: 10px 15px;
   color: black;
 }
@@ -164,7 +164,7 @@ footer span:nth-child(2) {
     margin-right: 50px;
   }
 
-  .skill_list h2 {
+  .skill-list h2 {
     text-align: center;
   }
 
@@ -185,7 +185,7 @@ footer span:nth-child(2) {
     margin: 0;
   }
 
-  .skill_list {
+  .skill-list {
     margin-bottom: 20px;
   }
 }
