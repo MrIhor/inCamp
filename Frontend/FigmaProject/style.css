@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: 700;
+}
+
+p {
+  font-family: 'Libre Franklin', sans-serif;
+font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*HEADER*/
+
+header {
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(rgba(198, 108, 73, 0.376), rgba(198, 108, 73, 0.376)), url(img/background.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 40px;
+  width: 100%;
+  height: 275px;
+}
+
+header .container {
+  color: #FFF;
+  text-align: center;
+  margin: 0 auto; 
+  width: 80%;
+}
+
+header .container-menu {
+  display: flex;
+  align-items: center;
+  /* margin-top: 40px; */
+  margin-bottom: 50px;
+}
+
+header .container-menu h1 {
+  flex-basis: 100%;
+}
+
+header .container-info h4 {
+  margin-bottom: 15px;
+}
+
+header .container-info h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+header .container-info p {
+  font-size: 13px;
+  margin-bottom: 40px;
+}
+
+header .container-info a {
+  text-decoration: underline;
+  font-size: 13px;
+}
+
+/*MAIN*/
+
+main {
+  text-align: justify;
+  margin: 0 auto;
+}
+
+main img {
+  width: 224px;
+}
+
+/*MAIN - ABOUT*/
+
+main .about {
+  text-align: center;
+  width: 70%;
+  margin: 25px auto;
+}
+
+main .about h1 {
+  margin-bottom: 20px;
+}
+
+main .about p {
+  text-align: justify;
+}
+
+/*MAIN - SKILLS*/
+
+main .skills {
+  text-align: center;
+  background-color: #FFFAF2;
+}
+
+main .skills h1 {
+  padding: 25px 0;
+}
+
+main .skill-list {
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main .skill-list div {
+  display: flex;
+}
+
+@media screen and (min-width: 515px) {
+  /*HEADER*/
+
+  header {
+    height: 400px;
+  }
+
+  header h1 {
+    font-size: 40px;
+  }
+
+  header img {
+    width: 30px;
+    height: 24px;
+  }
+
+  header .container-menu {
+    margin-bottom: 100px ;
+  }
+
+  header .container-info h2 {
+  font-size: 25px;
+  }
+
+  header .container-info p {
+    font-size: 17px;
+    margin-bottom: 40px;
+  }
+
+  header .container-info a {
+    text-decoration: underline;
+    font-size: 17px;
+  }
+}
+
+@media screen and (min-width: 740px) {
+  /*HEADER*/
+
+  header {
+    height: 650px;
+  }
+
+  header h1 {
+    font-size: 45px;
+  }
+
+  header .container-menu {
+    margin-bottom: 150px ;
+  }
+
+  header .container-info h2 {
+  font-size: 35px;
+  }
+
+  header .container-info p {
+    font-size: 20px;
+    margin-bottom: 80px;
+  }
+
+  header .container-info a {
+    text-decoration: underline;
+    font-size: 20px;
+  }
+
+  /*MAIN*/
+
+  main .about h1 {
+    text-align: left;
+  }
+}

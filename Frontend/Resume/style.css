@@ -19,6 +19,8 @@ body {
 
 h1, h2 {
   font-family: 'Roboto', sans-serif;
+  border-bottom: 2px solid black;
+  margin-bottom: 10px;
 }
 
 p, span, a, li {
@@ -61,20 +63,6 @@ aside {
   padding: 10px 15px;
 }
 
-.skill-list {
-  margin: 20px;
-}
-
-.skill-list h2 {
-  padding: 10px 0;
-  clear: left;
-}
-
-.skill-list ul li {
-  padding: 10px 15px;
-  color: black;
-}
-
 /*MAIN SECTION*/
 
 main {
@@ -113,6 +101,13 @@ td {
   text-align: center;
 }
 
+.skill-list li {
+  float: left;
+  padding: 10px 50px;
+  width: 50px ;
+}
+
+
 /*FOOTER*/
 
 footer {
@@ -127,7 +122,8 @@ footer {
 } 
 
 footer span:nth-child(1) {
-  padding: 50px;
+  padding: 0 50px;
+  position: absolute;
 }
 
 footer span:nth-child(2) {
