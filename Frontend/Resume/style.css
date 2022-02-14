@@ -106,18 +106,31 @@ td {
   text-align: center;
 }
 
-.skill-list li {
-  float: left;
-  padding: 10px 50px;
-  width: 50px ;
+/* main .skill-list {
+} */
+
+main .skill-list ul li img {
+  position: absolute;
+  width: 20px;
+  top: 30%;
+  left: 65%;
 }
 
 main ul {
-    display: inline-block;
+  width: 80%;
+  margin: 0 auto;
 }
 
 main ul li {
-  float: left;
+  position: relative;
+  display: inline-block;
+  width: 24%;
+  text-align: center;
+}
+
+main ul li h4 {
+  display: block;
+  padding: 10px 0;
 }
 
 /*FOOTER*/
@@ -150,12 +163,26 @@ footer span:nth-child(2) {
     float: right;
     margin: 0 100px;
   }
+
+  main .skill-list ul li img {
+    position: absolute;
+    width: 20px;
+    top: 30%;
+    left: 70%;
+  }
 }
 
 @media only screen and (max-width: 1540px) {
   main {
     width: 50%;
     margin: 0 180px 125px 180px;
+  }
+
+  main .skill-list ul li img {
+    position: absolute;
+    width: 20px;
+    top: 30%;
+    left: 80%;
   }
 }
 
@@ -180,6 +207,31 @@ footer span:nth-child(2) {
     padding: 0;
     width: auto;
   }
+
+  main .skill-list ul li img {
+    position: absolute;
+    width: 20px;
+    top: 30%;
+    left: 75%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  main .skill-list ul li img {
+    position: absolute;
+    width: 20px;
+    top: 30%;
+    left: 80%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  main .skill-list ul li img {
+    position: absolute;
+    width: 20px;
+    top: 30%;
+    left: 85%;
+  }
 }
 
 @media screen and (max-width: 680px) {
@@ -203,8 +255,9 @@ footer span:nth-child(2) {
   }
 
   main ul li {
-    float: none;
-    margin-bottom: 15px;
+    display: inherit;
+    width: 50%;
+    margin: 0 auto;
   }
 
   footer {
@@ -229,6 +282,13 @@ footer span:nth-child(2) {
     margin: 0;
     padding: 0;
   }
+
+  main .skill-list ul li img {
+    position: absolute;
+    width: 20px;
+    top: 30%;
+    left: 75%;
+  }
 }
  
 @media screen and (max-width: 445px) {
@@ -239,6 +299,13 @@ footer span:nth-child(2) {
 
   table {
     font-size: 13px;
+  }
+
+  main .skill-list ul li img {
+    position: absolute;
+    width: 20px;
+    top: 30%;
+    left: 85%;
   }
 }
  
@@ -254,5 +321,12 @@ footer span:nth-child(2) {
 
   table {
     font-size: 11px;
+  }
+
+  main .skill-list ul li img {
+    position: absolute;
+    width: 20px;
+    top: 30%;
+    left: 90%;
   }
 }
