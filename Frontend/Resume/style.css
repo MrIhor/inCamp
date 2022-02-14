@@ -17,13 +17,17 @@ body {
   margin-bottom: 60px;
 }
 
-h1, h2 {
+h1, h3 {
   font-family: 'Roboto', sans-serif;
   border-bottom: 2px solid black;
+}
+
+h2 {
+  font-family: 'Roboto', sans-serif;
   margin-bottom: 10px;
 }
 
-p, span, a, li {
+p, span, a, li, td {
   font-family: 'Roboto Condensed', sans-serif;;
 }
 
@@ -72,9 +76,10 @@ main {
   margin: 0 125px;
 }
 
-main h2 {
+main h3 {
   text-align: center;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
 main p {
@@ -107,6 +112,13 @@ td {
   width: 50px ;
 }
 
+main ul {
+    display: inline-block;
+}
+
+main ul li {
+  float: left;
+}
 
 /*FOOTER*/
 
@@ -123,7 +135,6 @@ footer {
 
 footer span:nth-child(1) {
   padding: 0 50px;
-  position: absolute;
 }
 
 footer span:nth-child(2) {
@@ -144,7 +155,7 @@ footer span:nth-child(2) {
 @media only screen and (max-width: 1540px) {
   main {
     width: 50%;
-    margin: 0 180px;
+    margin: 0 180px 125px 180px;
   }
 }
 
@@ -187,6 +198,15 @@ footer span:nth-child(2) {
 }
 
 @media screen and (max-width: 590px) {
+  main {
+    text-align: center;
+  }
+
+  main ul li {
+    float: none;
+    margin-bottom: 15px;
+  }
+
   footer {
     text-align: center;
     line-height: 30px;
