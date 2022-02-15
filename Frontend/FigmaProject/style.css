@@ -20,9 +20,8 @@ ul {
   list-style: none;
 }
 
-p, li {
+p, li, a {
   font-family: 'Libre Franklin', sans-serif;
-font-weight: 400;
 }
 
 a {
@@ -39,47 +38,58 @@ header {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 40px;
+  padding-top: 37px;
   width: 100%;
   height: 275px;
 }
 
-header .container {
+header .nav-menu {
+  display: none;
+}
+
+header .header-container {
   color: #FFF;
   text-align: center;
   margin: 0 auto; 
-  width: 80%;
+  width: 82%;
 }
 
-header .container-menu {
+header .burger-menu {
   display: flex;
   align-items: center;
-  /* margin-top: 40px; */
-  margin-bottom: 50px;
+  margin-bottom: 49px;
 }
 
-header .container-menu h1 {
-  flex-basis: 100%;
+header .burger-menu img {
+  flex-basis: 5%;
 }
 
-header .container-info h4 {
-  margin-bottom: 15px;
+header .burger-menu h2 {
+  flex-basis: 84%;
 }
 
-header .container-info h2 {
-  font-size: 20px;
-  margin-bottom: 15px;
+header .container-info {
+  display: flex;
+  flex-direction: column;
+  padding: 0 3px 0 1px;
+}
+
+header .container-info h3 {
+  margin-bottom: 13px;
+  font-size: 1.2em;
 }
 
 header .container-info p {
-  font-size: 13px;
-  margin-bottom: 40px;
+  font-size: 0.8em;
+  margin-bottom: 41px;
+  padding: 1px 0;
 }
 
 header .container-info a {
+  font-size: 1em;
   text-decoration: underline;
-  font-size: 13px;
 }
+
 
 /*MAIN*/
 
@@ -96,16 +106,19 @@ main img {
 
 main .about {
   text-align: center;
-  width: 80%;
+  width: 85%;
   margin: 25px auto;
 }
 
-main .about h1 {
+main .about h2 {
   margin-bottom: 20px;
 }
 
 main .about p {
   text-align: justify;
+  font-size: 0.8em;
+  word-spacing: 2px;
+  line-height: 15px;
 }
 
 /*MAIN - SKILLS*/
@@ -116,7 +129,7 @@ main .skills {
 }
 
 main .skills .skill-container {
-  width: 80%;
+  width: 83%;
   margin: 0 auto;
 }
 
@@ -125,29 +138,25 @@ main .skill-image {
   margin-bottom: 25px;
 }
 
-main .skills h1 {
+main .skills h2 {
   text-align: center;
-  padding: 25px 0;
-}
-
-main .skill-content {
-  padding-bottom: 25px;
+  padding: 5px 0 25px 0;
 }
 
 main .skill-list .list-item {
   display: flex;
   flex-flow: row wrap;
-  margin-bottom: 20px;
+  margin-bottom: 9px;
 }
 
 main .skill-list .list-item:nth-child(1) {
-  margin-bottom: 35px;
+  margin-bottom: 25px;
 }
 
 main .skill-list .list-item h5 { 
   font-size: 12px;
   flex-basis: 30%;
-  height: 30px;
+  height: 34px;
 }
 
 main .skill-list .list-item p, .range {
@@ -173,7 +182,6 @@ main .skill-list .list-item .range .range-goals {
 main .portfolio {
   width: 80%;
   margin: 0 auto;
-  padding-bottom: 25px;
 }
 
 main .portfolio .portfolio-title {
@@ -181,15 +189,55 @@ main .portfolio .portfolio-title {
 }
 
 main .portfolio .portfolio-title h2 {
-  padding: 20px 0;
+  padding: 10px 0 23px 0;
 }
 
-main .portfolio .colage {
-  width: 80%;
-  padding: 25px 0;
-  margin: 0 auto;
-  display: flex;
+main .portfolio .portfolio-title h4 {
+  margin-bottom: 17px;
 }
+
+main .portfolio .portfolio-title p {
+  font-size: 0.75em;
+  justify-content: inherit;
+}
+
+main .portfolio .portfolio-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  justify-content: center;
+  margin-bottom: 45px;
+}
+
+main .portfolio .portfolio-content .portfolio-info {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 5px;
+  font-size: 0.8em;
+}
+
+main .portfolio .portfolio-content .colage {
+  display: flex;
+  max-width: 100%;
+  justify-content: center;
+}
+
+main .portfolio .colage .colage-item {
+  display: flex;
+  flex-direction: column;
+}
+
+main .portfolio .colage .colage-item:nth-child(1) {
+  margin-right: 15px;
+}
+
+main .portfolio .colage .colage-item img {
+  max-width: fit-content;
+}
+
+main .portfolio .colage .colage-item img:nth-child(1) {
+  margin-bottom: 15px;
+} 
 
 /*FOOTER*/
 
@@ -204,9 +252,9 @@ footer .footer-container {
   padding-bottom: 50px;
 }
 
-footer h1 {
+footer h2 {
   text-align: center;
-  padding: 25px 0;
+  padding: 5px 0 24px 0;
 }
 
 footer .footer-container .lists {
@@ -216,7 +264,11 @@ footer .footer-container .lists {
 }
 
 footer .footer-container .lists li {
-  margin-bottom: 20px;
+  margin-bottom: 19px;
+}
+
+footer .footer-container .lists li p {
+  font-size: 0.9em;
 }
 
 footer .footer-container .footer-contacts {
@@ -229,8 +281,8 @@ footer .footer-container .footer-contacts .personal-info p {
 
 footer .footer-container img {
   position: absolute;
-  right: 3%;
-  bottom: 18%;
+  right: -2%;
+  bottom: 21%;
 }
 
 @media screen and (min-width: 515px) {
@@ -240,16 +292,12 @@ footer .footer-container img {
     height: 400px;
   }
 
-  header h1 {
-    font-size: 40px;
-  }
-
   header img {
     width: 30px;
     height: 24px;
   }
 
-  header .container-menu {
+  header .burger-menu {
     margin-bottom: 100px ;
   }
 
@@ -275,12 +323,12 @@ footer .footer-container img {
     height: 650px;
   }
 
-  header h1 {
-    font-size: 45px;
+  header .burger-menu {
+    margin-bottom: 150px ;
   }
 
-  header .container-menu {
-    margin-bottom: 150px ;
+  header .burger-menu h2 {
+    flex-basis: 90%;
   }
 
   header .container-info h2 {
@@ -298,14 +346,6 @@ footer .footer-container img {
   }
 
   /*MAIN*/
-
-  main .about h1 {
-    text-align: left;
-  }
-
-  main .skills h1 {
-    text-align: left;
-  }
 
   main .skill-container .skill-content {
     display: flex;
@@ -329,8 +369,19 @@ footer .footer-container img {
     margin-bottom: 30px;
   }
 
-  footer h1 {
-    text-align: left;
+  main .portfolio .portfolio-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  main .portfolio .portfolio-content .portfolio-info {
+    text-align: justify;
+    width: 30%;
+  }
+
+  main .portfolio .portfolio-content .colage {
+    margin: 0;
   }
 
   footer .footer-container .footer-contacts {
@@ -344,7 +395,34 @@ footer .footer-container img {
   }
 }
 
-@media screen and (min-width: 1020px) {
+@media screen and (min-width: 980px) {
+  header .header-container .burger-menu {
+    display: none;
+  }
+
+  header .header-container .nav-menu {
+    display: block;
+  }
+
+  header .header-container .nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 95px 0 145px 0;
+  }
+
+  header .header-container .nav-menu ul {
+    display: flex;
+  }
+
+  header .header-container .nav-menu ul li {
+    margin-right: 20px;
+  }
+
+  header .header-container .container-info {
+    text-align: left;
+  }
+
   main .about p {
     font-size: 18px;
   }
@@ -383,5 +461,49 @@ footer .footer-container img {
 
   footer p {
     font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  header {
+    height: 770px;
+  }
+
+  header .header-container {
+    width: 77%;
+  }
+
+  header .header-container .nav-menu {
+    margin: 55px 0 147px 0;
+  }
+
+  header .header-container .nav-menu {
+    justify-content: space-between;
+  }
+
+  header .header-container .nav-menu ul li {
+    margin: 0 0 0 61px;
+    font-size: 18px;
+  }
+
+  header .container-info h3 {
+    font-size: 64px;
+    font-weight: lighter;
+    margin-bottom: 24px;
+  }
+
+  header .container-info p {
+    font-size: 24px;
+    margin-bottom: 105px;
+  }
+
+  header .container-info a {
+    font-size: 18px;
+  }
+
+  main .about {
+    margin: 91px;
+    text-align: left;
+    width: 75%;;
   }
 }
