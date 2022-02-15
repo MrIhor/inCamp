@@ -38,9 +38,9 @@ header {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 37px;
+  padding-top: 29px;
   width: 100%;
-  height: 275px;
+  height: 267px;
 }
 
 header .nav-menu {
@@ -98,10 +98,6 @@ main {
   margin: 0 auto;
 }
 
-main img {
-  width: 224px;
-}
-
 /*MAIN - ABOUT*/
 
 main .about {
@@ -114,12 +110,18 @@ main .about h2 {
   margin-bottom: 20px;
 }
 
-main .about p {
+main .about .about-info p {
+  line-height: 30px;
   text-align: justify;
-  font-size: 0.8em;
+  font-size: 0.68em;
   word-spacing: 2px;
   line-height: 15px;
 }
+
+main .about .about-info p:nth-child(1) {
+  margin-bottom: 30px;
+}
+
 
 /*MAIN - SKILLS*/
 
@@ -138,9 +140,13 @@ main .skill-image {
   margin-bottom: 25px;
 }
 
+main .skills img {
+  width: 224px;
+}
+
 main .skills h2 {
   text-align: center;
-  padding: 5px 0 25px 0;
+  padding: 25px 0 25px 0;
 }
 
 main .skill-list .list-item {
@@ -180,6 +186,7 @@ main .skill-list .list-item .range .range-goals {
 /*MAIN PORTFOLIO*/
 
 main .portfolio {
+  position: relative;
   width: 80%;
   margin: 0 auto;
 }
@@ -206,13 +213,13 @@ main .portfolio .portfolio-content {
   flex-direction: column;
   max-width: 100%;
   justify-content: center;
-  margin-bottom: 45px;
+  margin-bottom: 5px;
 }
 
 main .portfolio .portfolio-content .portfolio-info {
   text-align: center;
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   font-size: 0.8em;
 }
 
@@ -239,6 +246,13 @@ main .portfolio .colage .colage-item img:nth-child(1) {
   margin-bottom: 15px;
 } 
 
+main .portfolio .slider-buttons {
+  position: absolute;
+  bottom: 15%;
+  left: 3%;
+  display: none;
+}
+
 /*FOOTER*/
 
 footer {
@@ -254,7 +268,7 @@ footer .footer-container {
 
 footer h2 {
   text-align: center;
-  padding: 5px 0 24px 0;
+  padding: 35px 0 24px 0;
 }
 
 footer .footer-container .lists {
@@ -272,17 +286,18 @@ footer .footer-container .lists li p {
 }
 
 footer .footer-container .footer-contacts {
-  width: 80%;
+  width: 77%;
 }
 
 footer .footer-container .footer-contacts .personal-info p {
   padding-bottom: 5px;
+  font-size: 13px;
 }
 
 footer .footer-container img {
   position: absolute;
-  right: -2%;
-  bottom: 21%;
+  right: -1%;
+  bottom: 19%;
 }
 
 @media screen and (min-width: 515px) {
@@ -346,6 +361,10 @@ footer .footer-container img {
   }
 
   /*MAIN*/
+
+  main .about .about-info p {
+    font-size: 18px;
+  }
 
   main .skill-container .skill-content {
     display: flex;
@@ -423,8 +442,9 @@ footer .footer-container img {
     text-align: left;
   }
 
-  main .about p {
-    font-size: 18px;
+  header .container-info h3 {
+    font-weight: lighter;
+    font-size: 30px;
   }
 
   main .skill-container .skill-content .skill-list {
@@ -467,6 +487,7 @@ footer .footer-container img {
 @media screen and (min-width: 1400px) {
   header {
     height: 770px;
+    padding-top: 36px;
   }
 
   header .header-container {
@@ -502,8 +523,161 @@ footer .footer-container img {
   }
 
   main .about {
-    margin: 91px;
+    padding-top: 91px;
+    width: 77%;
     text-align: left;
-    width: 75%;;
+    margin: 0 auto;
+  }
+
+  main .about h2 {
+    margin-bottom: 76px;
+  }
+
+  main .about .about-info {
+    margin-bottom: 135px;
+  }
+
+  main .about .about-info p {
+    line-height: 30px;
+  }
+
+  main .about .about-info p:nth-child(1) {
+    margin-bottom: 30px;
+  }
+
+  main .skills .skill-container {
+    width: 77%;
+  }
+
+  main .skills .skill-container h2 {
+    text-align: left;
+    padding: 95px 0 85px 0;
+  }
+
+  main .skill-container .skill-content .skill-image img {
+    width: 350px;
+  }
+
+  main .skill-container .skill-content .skill-list {
+    width: 57%;
+    margin: 0;
+  }
+
+  main .skill-list .list-item:nth-child(1) {
+    margin-bottom: 52px;
+  }
+
+  main .skill-list .list-item {
+    margin-bottom: 3px;
+  }
+
+  main .skill-list .list-item h5 {
+    height: 43px;
+  }
+
+  main .skill-container .skill-content {
+    padding-bottom: 120px;
+  }
+
+  main .portfolio {
+    width: 77%;
+    padding-bottom: 100px;
+  }
+
+  main .portfolio .portfolio-title {
+    text-align: left;
+    margin-top: 80px;
+  }
+
+  main .portfolio .portfolio-title h2 {
+    margin-bottom: 63px;
+  }
+
+  main .portfolio .portfolio-title h4 {
+    font-size: 18px;
+  }
+
+  main .portfolio .portfolio-content {
+    padding: 20px 0 0 0;
+    height: 430px;
+  }
+
+  main .portfolio .portfolio-content .portfolio-info {
+    padding-top: 12px;
+    line-height: 30px;
+    width: 32%;
+  }
+
+  main .portfolio .portfolio-content .colage {
+    width: 68%;
+    margin: 0%;
+    justify-content: flex-end;
+  }
+
+  main .portfolio .colage .colage-item:nth-child(1) {
+    width: 45%;
+  }
+
+  main .portfolio .colage .colage-item:first-child img:last-child {
+    height: 60%;
+  }
+
+  main .portfolio .colage .colage-item:last-child img:first-child {
+    height: 60%;
+  }
+
+  main .portfolio .colage .colage-item:nth-child(2) {
+    width: 30%;
+  }
+
+  main .portfolio .colage .colage-item:nth-child(1) {
+    margin-right: 25px;
+  }
+
+  main .portfolio .colage .colage-item img {
+    max-width: 100%;
+    height: 40%;
+  }
+
+  main .portfolio .colage .colage-item img:nth-child(1) {
+    margin-bottom: 25px;
+  }
+
+  main .portfolio .slider-buttons {
+    display: block;
+  }
+
+  main .portfolio .slider-buttons img:nth-child(1) {
+    margin-right: 15px;
+  }
+
+  footer .footer-container {
+    width: 77%;
+  }
+
+  footer .footer-container h2 {
+    text-align: left;
+    padding: 133px 0 50px 0;
+  }
+
+  footer .footer-container .lists li {
+    font-size: 21px;
+    margin-bottom: 13px;
+  }
+
+  footer .footer-container .footer-contacts {
+    width: 84%;
+  }
+
+  footer .footer-container .footer-contacts .personal-info p:nth-child(1) {
+    padding-bottom: 14px;
+  }
+
+  footer .footer-container .footer-contacts .personal-info p:nth-child(2) {
+    font-size: 15px;
+  }
+
+  footer .footer-container .footer-contacts .personal-info p {
+    font-size: 18px;
   }
 }
