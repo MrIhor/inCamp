@@ -10,7 +10,7 @@ const tasks = [
     id: 2,
     title: "Cook dinner",
     date: "02/11/2022",
-    done: false,
+    done: true,
     description: "Some description"
   },
   {
@@ -31,18 +31,20 @@ const tasks = [
     id: 5,
     title: "Help father",
     date: "02/20/2022",
-    done: false,
+    done: true,
     description: "Some description"
   }
 ]
 
 const list = document.getElementById('list');
+const filterCheckbox = document.querySelector('.switch input');
+
 
 if (tasks.length <= 0) {
   list.innerHTML = "<label>You don't have tasks yet</label>"
 }
 
-function renderList({ title, date, description, done }) {
+function render({ title, date, description, done }) {
   const currentDate = new Date();
   const taskDate = new Date(date);
   const overdue = currentDate >= taskDate;
@@ -66,7 +68,27 @@ function renderList({ title, date, description, done }) {
 </li>`
 }
 
+
+function renderUncomplete(taskList) {
+  return taskList.filter(({ done }) => done === false);
+}
+
+const filterTask = renderUncomplete(tasks);
+
 tasks.forEach(renderList);
+
+
+filterCheckbox.addEventListener('click', () => {
+  console.log(filterCheckbox.checked);
+
+  if (filterCheckbox.checked) {
+    tasks.forEach(renderList)
+    console.log(tasks)
+  } else {
+    filterTask.forEach(renderList)
+    console.log(filterTask);
+  }
+})
 
 const checkButton = document.querySelectorAll('#list li .list-item-title input');
 const taskLabels = document.querySelectorAll('#list li .list-item-title label');
@@ -78,7 +100,6 @@ function checkHandler(input, index) {
     tasks[index].done = !tasks[index].done;
 
     taskLabels[index].classList.toggle('complete');
-    console.log(tasks[index])
   })
 }
 
