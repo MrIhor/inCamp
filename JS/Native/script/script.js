@@ -9,7 +9,7 @@ const tasks = [
   {
     id: 2,
     title: "Cook dinner",
-    date: "02/11/2022",
+    date: "",
     done: true,
     description: "Some description"
   },
@@ -49,16 +49,18 @@ function render({ title, date, description, done }) {
   const taskDate = new Date(date);
   const overdue = currentDate >= taskDate;
 
-  const check = done ? 'checked' : null;
+  const check = done ? 'checked' : '';
   const doneTask = done ? 'complete' : 'uncomplete';
-  const hasDescription = description ? description : "You don't have description for this task";
+  const hasDescription = description ? description : "-";
+  const hasDate = date ? date : "-";
   const isOverdue = overdue ? 'overdue' : '';
 
   list.innerHTML += `<li>
           <div class="list-item-title">
            <div><input type="checkbox" ${check}></div>
             <label class="${doneTask}">${title}</label>
-            <span class="${isOverdue}">${date}</span>
+            <span class="${isOverdue}">${hasDate}</span>
+            <div><button class="delete"><span>Delete</span></button></div>
            <div><img src="img/arrow.png" alt="arrow"></div>
          </div>
 
@@ -69,13 +71,13 @@ function render({ title, date, description, done }) {
 }
 
 
-function renderUncomplete(taskList) {
-  return taskList.filter(({ done }) => done === false);
-}
+// function renderUncomplete(taskList) {
+//   return taskList.filter(({ done }) => done === false);
+// }
 
-const filterTask = renderUncomplete(tasks);
+// const filterTask = renderUncomplete(tasks);
 
-tasks.forEach(renderList);
+tasks.forEach(render);
 
 
 filterCheckbox.addEventListener('click', () => {
