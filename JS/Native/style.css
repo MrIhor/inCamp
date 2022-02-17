@@ -107,6 +107,10 @@ main .task-list #list li {
   flex-direction: column;
 }
 
+main .task-list #list .hide {
+  display: none;
+}
+
 main .task-list #list li > * {
   height: 50px;
 }
@@ -133,13 +137,13 @@ main .task-list #list li .list-item-title input[type='checkbox'] {
 
 main .task-list #list li .list-item-title .complete {
   text-decoration: line-through;
+  color: rgb(116, 115, 115);
 }
 
 main .task-list #list li .list-item-title .delete {
   height: 65%;
   width: 50%;
-  background-color: #f23d30;
-  /* border: 1px solid #7f53ac; */
+  background-color: #e94757;
   border-radius: 10px;
 }
 

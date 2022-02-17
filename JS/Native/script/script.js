@@ -37,27 +37,24 @@ const tasks = [
 ]
 
 const list = document.getElementById('list');
-const filterCheckbox = document.querySelector('.switch input');
-const filterTask = tasks.filter(({ done }) => done === false);
+const switchButton = document.querySelector('.switch input');
+let switchValue = switchButton.checked;
 
 if (tasks.length <= 0) {
   list.innerHTML = "<label>You don't have tasks yet</label>"
 }
 
-function render(tasksList) {
-  list.innerHTML = '';
-  tasksList.forEach(({ title, date, description, done }) => {
-    const currentDate = new Date();
-    const taskDate = new Date(date);
-    const overdue = currentDate >= taskDate;
+function createTaskHtml({ title, date, description, done }) {
+  const currentDate = new Date();
+  const taskDate = new Date(date);
+  const overdue = currentDate >= taskDate;
 
-    const check = done ? 'checked' : '';
-    const doneTask = done ? 'complete' : 'uncomplete';
-    const hasDescription = description ? description : "-";
-    const hasDate = date ? date : "-";
-    const isOverdue = overdue ? 'overdue' : '';
-
-    list.innerHTML += `<li>
+  const check = done ? 'checked' : '';
+  const doneTask = done ? 'complete' : '';
+  const hasDescription = description ? description : "-";
+  const hasDate = date ? date : "-";
+  const isOverdue = overdue ? 'overdue' : '';
+  const task = `<li>
           <div class="list-item-title">
            <div><input type="checkbox" ${check}></div>
             <label class="${doneTask}">${title}</label>
@@ -70,40 +67,55 @@ function render(tasksList) {
            <p>${hasDescription}</p>
           </div>
       </li>`
-  })
 
+  return task;
 }
 
-render(tasks)
+function createList() {
+  const tasksList = [];
 
-let listCheckbox = filterCheckbox.checked;
+  tasks.forEach(task => {
+    tasksList.push(createTaskHtml(task));
+  })
 
-filterCheckbox.addEventListener('click', () => {
-  listCheckbox = !listCheckbox;
+  return tasksList;
+}
 
-  listCheckbox ? render(filterTask) : render(tasks);
+function render() {
+  list.innerHTML = createList().join('');
+}
+
+render();
+
+switchButton.addEventListener('click', event => {
+  switchValue = !event.target.checked;
+
+  list.childNodes.forEach((task, index) => {
+    if (tasks[index].done) {
+      task.classList.toggle('hide');
+    }
+  })
 })
 
-
-const checkButton = document.querySelectorAll('#list li .list-item-title input');
+const checkButtons = document.querySelectorAll('#list li .list-item-title input');
 const taskLabels = document.querySelectorAll('#list li .list-item-title label');
 const descriptionButton = document.querySelectorAll('#list li .list-item-title img');
 const descriptionLabel = document.querySelectorAll('#list li .list-item-description');
 
-function checkHandler(input, index) {
-  input.addEventListener('click', () => {
-    tasks[index].done = !tasks[index].done;
-
-    taskLabels[index].classList.toggle('complete');
-  })
-}
-
-function showDescriprion(button, index) {
-  button.addEventListener('click', () => {
-    descriptionButton[index].classList.toggle('reverse');
+descriptionButton.forEach((button, index) => {
+  button.addEventListener('click', (event) => {
+    event.target.classList.toggle('reverse');
     descriptionLabel[index].classList.toggle('show');
   })
-}
+});
 
-checkButton.forEach(checkHandler);
-descriptionButton.forEach(showDescriprion);
+checkButtons.forEach((input, index) => {
+  input.addEventListener('click', event => {
+    tasks[index].done = event.target.checked;
+
+    taskLabels[index].classList.toggle('complete');
+    if (switchButton.checked) {
+      list.childNodes[index].classList.toggle('hide');
+    }
+  })
+});
