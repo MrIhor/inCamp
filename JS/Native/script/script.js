@@ -38,24 +38,26 @@ const tasks = [
 
 const list = document.getElementById('list');
 const filterCheckbox = document.querySelector('.switch input');
-
+const filterTask = tasks.filter(({ done }) => done === false);
 
 if (tasks.length <= 0) {
   list.innerHTML = "<label>You don't have tasks yet</label>"
 }
 
-function render({ title, date, description, done }) {
-  const currentDate = new Date();
-  const taskDate = new Date(date);
-  const overdue = currentDate >= taskDate;
+function render(tasksList) {
+  list.innerHTML = '';
+  tasksList.forEach(({ title, date, description, done }) => {
+    const currentDate = new Date();
+    const taskDate = new Date(date);
+    const overdue = currentDate >= taskDate;
 
-  const check = done ? 'checked' : '';
-  const doneTask = done ? 'complete' : 'uncomplete';
-  const hasDescription = description ? description : "-";
-  const hasDate = date ? date : "-";
-  const isOverdue = overdue ? 'overdue' : '';
+    const check = done ? 'checked' : '';
+    const doneTask = done ? 'complete' : 'uncomplete';
+    const hasDescription = description ? description : "-";
+    const hasDate = date ? date : "-";
+    const isOverdue = overdue ? 'overdue' : '';
 
-  list.innerHTML += `<li>
+    list.innerHTML += `<li>
           <div class="list-item-title">
            <div><input type="checkbox" ${check}></div>
             <label class="${doneTask}">${title}</label>
@@ -67,30 +69,21 @@ function render({ title, date, description, done }) {
           <div class="list-item-description">
            <p>${hasDescription}</p>
           </div>
-</li>`
+      </li>`
+  })
+
 }
 
+render(tasks)
 
-// function renderUncomplete(taskList) {
-//   return taskList.filter(({ done }) => done === false);
-// }
-
-// const filterTask = renderUncomplete(tasks);
-
-tasks.forEach(render);
-
+let listCheckbox = filterCheckbox.checked;
 
 filterCheckbox.addEventListener('click', () => {
-  console.log(filterCheckbox.checked);
+  listCheckbox = !listCheckbox;
 
-  if (filterCheckbox.checked) {
-    tasks.forEach(renderList)
-    console.log(tasks)
-  } else {
-    filterTask.forEach(renderList)
-    console.log(filterTask);
-  }
+  listCheckbox ? render(filterTask) : render(tasks);
 })
+
 
 const checkButton = document.querySelectorAll('#list li .list-item-title input');
 const taskLabels = document.querySelectorAll('#list li .list-item-title label');
