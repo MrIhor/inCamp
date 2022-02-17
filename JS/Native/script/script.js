@@ -44,7 +44,7 @@ if (tasks.length <= 0) {
   list.innerHTML = "<label>You don't have tasks yet</label>"
 }
 
-function createTaskHtml({ title, date, description, done }) {
+function createTaskHtml({ id, title, date, description, done }) {
   const currentDate = new Date();
   const taskDate = new Date(date);
   const overdue = currentDate >= taskDate;
@@ -54,12 +54,12 @@ function createTaskHtml({ title, date, description, done }) {
   const hasDescription = description ? description : "-";
   const hasDate = date ? date : "-";
   const isOverdue = overdue ? 'overdue' : '';
-  const task = `<li>
+  const task = `<li id=${id}>
           <div class="list-item-title">
-           <div><input type="checkbox" ${check}></div>
+           <div><input type="checkbox" taskId=${id} ${check}></div>
             <label class="${doneTask}">${title}</label>
             <span class="${isOverdue}">${hasDate}</span>
-            <div><button class="delete"><span>Delete</span></button></div>
+            <div><button class="delete" taskId=${id}><span>Delete</span></button></div>
            <div><img src="img/arrow.png" alt="arrow"></div>
          </div>
 
@@ -86,14 +86,21 @@ function render() {
 }
 
 render();
+const checkboxes = document.querySelectorAll('#list li .list-item-title input');
 
 switchButton.addEventListener('click', event => {
-  switchValue = !event.target.checked;
 
+  console.log(switchButton.checked);
   list.childNodes.forEach((task, index) => {
-    if (tasks[index].done) {
-      task.classList.toggle('hide');
-    }
+    checkboxes.forEach(box => {
+      const checkboxId = box.getAttribute('taskId');
+
+      if (task.id === checkboxId) {
+        if (box.checked) {
+          task.classList.toggle('hide');
+        }
+      }
+    })
   })
 })
 
@@ -101,9 +108,10 @@ const checkButtons = document.querySelectorAll('#list li .list-item-title input'
 const taskLabels = document.querySelectorAll('#list li .list-item-title label');
 const descriptionButton = document.querySelectorAll('#list li .list-item-title img');
 const descriptionLabel = document.querySelectorAll('#list li .list-item-description');
+const deleteButtons = document.querySelectorAll('main .task-list #list li .list-item-title .delete');
 
-descriptionButton.forEach((button, index) => {
-  button.addEventListener('click', (event) => {
+descriptionButton.forEach((descriptionButton, index) => {
+  descriptionButton.addEventListener('click', (event) => {
     event.target.classList.toggle('reverse');
     descriptionLabel[index].classList.toggle('show');
   })
@@ -119,3 +127,16 @@ checkButtons.forEach((input, index) => {
     }
   })
 });
+
+deleteButtons.forEach((deleteButton) => {
+  const deleteId = deleteButton.getAttribute('taskId');
+
+  deleteButton.addEventListener('click', () => {
+    list.childNodes.forEach(task => {
+      if (task.id === deleteId) {
+        task.remove();
+      }
+      console.log(task.id, deleteId);
+    })
+  })
+})

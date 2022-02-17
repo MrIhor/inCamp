@@ -141,6 +141,7 @@ main .task-list #list li .list-item-title .complete {
 }
 
 main .task-list #list li .list-item-title .delete {
+  cursor: pointer;
   height: 65%;
   width: 50%;
   background-color: #e94757;
