@@ -47,7 +47,12 @@ main {
   margin-bottom: 200px;
 }
 
-main .create {
+main h2 {
+  text-align: center;
+  padding: 20px 0;
+}
+
+main form {
   display: flex;
   flex-direction: column;
   width: 70%;
@@ -56,26 +61,22 @@ main .create {
   border-bottom: 2px solid black;
 }
 
-main h2 {
-  text-align: center;
-  padding: 20px 0;
-}
 
-main .create label {
+main form label {
   margin-top: 10px;
 }
 
-main .create input[type='text'] {
+main form input[type='text'] {
   font-size: 24px;
   padding: 15px;
   margin-top: 5px;
 }
 
-main .create label[for='taskDate'] {
+main form label[for='taskDate'] {
   text-align: center;
 }
 
-main .create input[type='date'] {
+main form input[type='date'] {
   width: 50%;
   margin: 0 auto;
   font-size: 20px;
@@ -90,6 +91,19 @@ main .task-list .main-title .switch {
   position: absolute;
   right: 15%;
   top: 27%;
+}
+
+main .task-list .main-title .currentTasks {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  width: 190px;
+  right: 7%;
+  top: 40%;
+}
+
+main .task-list .main-title .currentTasks .hide {
+  display: none;
 }
 
 main .task-list #list label {
@@ -196,7 +210,8 @@ footer .footer-info {
 
 .switch {
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: space-between;
   width: 60px;
   height: 34px;
 }

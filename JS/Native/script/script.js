@@ -86,11 +86,15 @@ function render() {
 }
 
 render();
+
 const checkboxes = document.querySelectorAll('#list li .list-item-title input');
+const checkButtons = document.querySelectorAll('#list li .list-item-title input');
+const taskLabels = document.querySelectorAll('#list li .list-item-title label');
+const descriptionButton = document.querySelectorAll('#list li .list-item-title img');
+const descriptionLabel = document.querySelectorAll('#list li .list-item-description');
+const deleteButtons = document.querySelectorAll('main .task-list #list li .list-item-title .delete');
 
 switchButton.addEventListener('click', event => {
-
-  console.log(switchButton.checked);
   list.childNodes.forEach((task, index) => {
     checkboxes.forEach(box => {
       const checkboxId = box.getAttribute('taskId');
@@ -103,12 +107,6 @@ switchButton.addEventListener('click', event => {
     })
   })
 })
-
-const checkButtons = document.querySelectorAll('#list li .list-item-title input');
-const taskLabels = document.querySelectorAll('#list li .list-item-title label');
-const descriptionButton = document.querySelectorAll('#list li .list-item-title img');
-const descriptionLabel = document.querySelectorAll('#list li .list-item-description');
-const deleteButtons = document.querySelectorAll('main .task-list #list li .list-item-title .delete');
 
 descriptionButton.forEach((descriptionButton, index) => {
   descriptionButton.addEventListener('click', (event) => {
