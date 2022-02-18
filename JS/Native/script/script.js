@@ -38,11 +38,6 @@ const tasks = [
 
 const list = document.getElementById('list');
 const switchButton = document.querySelector('.switch input');
-let switchValue = switchButton.checked;
-
-if (tasks.length <= 0) {
-  list.innerHTML = "<label>You don't have tasks yet</label>"
-}
 
 function createTaskHtml({ id, title, date, description, done }) {
   const currentDate = new Date();
@@ -95,7 +90,7 @@ const descriptionLabel = document.querySelectorAll('#list li .list-item-descript
 const deleteButtons = document.querySelectorAll('main .task-list #list li .list-item-title .delete');
 
 switchButton.addEventListener('click', event => {
-  list.childNodes.forEach((task, index) => {
+  list.childNodes.forEach(task => {
     checkboxes.forEach(box => {
       const checkboxId = box.getAttribute('taskId');
 
