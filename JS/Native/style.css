@@ -72,6 +72,14 @@ main form input[type='text'] {
   margin-top: 5px;
 }
 
+main form .valid {
+  border: 2px solid #e94757;
+}
+
+main form .valid::-webkit-input-placeholder {
+  color: red;
+}
+
 main form label[for='taskDate'] {
   text-align: center;
 }
