@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>TodoList</h1>
+    </header>
+
+    <main>
+      <h2>Create Task</h2>
+
+      <form name="createTask">
+        <label for="title">Title</label>
+        <input type="text" name="title" placeholder="Title">
+        <label for="description">Description</label>
+        <input type="text" name="description" placeholder="Description">
+        <label for="taskDate">Due date</label>
+        <input type="date" name="due_date">
+        <div><button type="submit"><span>Add Task</span></button></div>
+      </form>
+
+      <div class="task-list">
+        <div class="main-title">
+          <h2>Tasks</h2>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round">
+            </span>
+          </label>
+        </div>
+        <ul id="list">
+          <template id="template-task">
+            <li>
+              <div class="list-item-title">
+                <div><input type="checkbox" class="taskCheckbox"></div>
+                <label></label>
+                <span></span>
+                <div><button class="delete"><span>Delete</span></button></div>
+                <div><img src="img/arrow.png" alt="arrow"></div>
+              </div>
+
+              <div class="list-item-description">
+                <p></p>
+              </div>
+            </li>
+          </template>
+        </ul>
+      </div>
+
+
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-info">
+      <span>Created by Ihor Mol</span>
+      <span>molchanigor54@gmail.com</span>
+    </div>
+  </footer>
+
+  <script src="script/template.js"></script>
+</body>
+
+</html>
