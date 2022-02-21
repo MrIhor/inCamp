@@ -86,7 +86,7 @@ header .container-info p {
 }
 
 header .container-info a {
-  font-size: 1em;
+  font-size: 0.8em;
   text-decoration: underline;
 }
 
@@ -219,7 +219,7 @@ main .portfolio .portfolio-content {
 main .portfolio .portfolio-content .portfolio-info {
   text-align: center;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-size: 0.8em;
 }
 
@@ -268,11 +268,11 @@ footer .footer-container {
 
 footer h2 {
   text-align: center;
-  padding: 35px 0 24px 0;
+  padding: 40px 0 24px 0;
 }
 
 footer .footer-container .lists {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   display: flex;
   justify-content: space-between;
 }

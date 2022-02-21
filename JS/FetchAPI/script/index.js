@@ -114,8 +114,6 @@ function renderTask({ id, title, due_date, description, done }) {
   const paragraph = taskElement.querySelector('p');
   const date = due_date === null ? null : new Date(due_date);
 
-  console.log(id, due_date);
-
   checkButton.checked = done;
   label.textContent = title;
   span.textContent = getFormatDate(date) ? getFormatDate(date) : '-';
