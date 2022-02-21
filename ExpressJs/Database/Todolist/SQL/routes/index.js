@@ -4,7 +4,7 @@ const listRouter = require('./listRoutes');
 const dashboardRouter = require('./dashboardRoutes');
 const collectionRouter = require('./collectionRoutes');
 
-router.use('/lists', taskRouter);
+router.use('', taskRouter);
 router.use('/lists', listRouter);
 router.use('/dashboard', dashboardRouter);
 router.use('/collection', collectionRouter);

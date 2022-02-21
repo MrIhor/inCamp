@@ -1,18 +1,12 @@
 const db = require('../db');
 
 async function createTask(req, res) {
-    const { title, listId, date } = req.body;
+    const { title, description, due_date } = req.body;
     const done = false;
 
-    const list = await db.query('select * from lists where id=$1', [listId]);
-
-    if (list.rows[0]) {
-        const newTask = await db.query('insert into todos (title, done, due_date, list_id) values ($1, $2, $3, $4) returning *',
-            [title, done, date, listId]);
-        res.json(newTask.rows[0]);
-    } else {
-        res.json("You don't have list with this id");
-    }
+    const newTask = await db.query('insert into todos (title, done, due_date, description) values ($1, $2, $3, $4) returning *',
+        [title, done, due_date, description]);
+    res.json(newTask.rows[0]);
 }
 
 async function getAllTasks(req, res) {
@@ -46,20 +40,14 @@ async function deleteTask(req, res) {
 
 async function editTask(req, res) {
     const { id } = req.params;
-    const { title, done, date } = req.body;
+    const { done } = req.body;
 
     const task = await db.query("SELECT * FROM todos where id = $1", [id]);
 
     if (task.rows[0]) {
-        const currentTask = task.rows[0];
         const newTask = await db.query(
-            "UPDATE todos set title=$2, done=$3, due_date=$4 where id=$1 RETURNING *",
-            [
-                id,
-                title ? title : currentTask.title,
-                done ? done : currentTask.done,
-                date ? date : currentTask.due_data
-            ]
+            "UPDATE todos set done=$2 where id=$1 RETURNING *",
+            [id, done]
         );
 
         if (newTask.rows[0]) {

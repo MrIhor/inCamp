@@ -113,55 +113,55 @@ main .task-list .main-title .switch {
   top: 27%;
 }
 
-main .task-list #list label {
+main .task-list ul label {
   text-align: center;
 }
 
-main .task-list #list {
+main .task-list ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-main .task-list #list li {
+main .task-list ul li {
   display: flex;
   flex-direction: column;
 }
 
-main .task-list #list .hide {
+main .task-list ul .hide {
   display: none;
 }
 
-main .task-list #list li > * {
+main .task-list ul li > * {
   height: 50px;
 }
 
-main .task-list #list li .list-item-title {
+main .task-list ul li .list-item-title {
   display: flex;
   align-items: center;
 }
 
-main .task-list #list li .list-item-title .overdue {
+main .task-list ul li .list-item-title .overdue {
   color: red;
 }
 
-main .task-list #list li .list-item-title > * {
+main .task-list ul li .list-item-title > * {
   flex-basis: 25%;
   text-align: center;
 }
 
-main .task-list #list li .list-item-title input[type='checkbox'] {
+main .task-list ul li .list-item-title input[type='checkbox'] {
   cursor: pointer;
   width: 30px !important;
   height: 30px !important;
 }
 
-main .task-list #list li .list-item-title .complete {
+main .task-list ul li .list-item-title .complete {
   text-decoration: line-through;
   color: rgb(116, 115, 115);
 }
 
-main .task-list #list li .list-item-title .delete {
+main .task-list ul li .list-item-title .delete {
   cursor: pointer;
   height: 65%;
   width: 50%;
@@ -169,30 +169,40 @@ main .task-list #list li .list-item-title .delete {
   border-radius: 10px;
 }
 
-main .task-list #list li .list-item-title .delete:hover {
+main .task-list ul li .list-item-title .delete:hover {
   border-radius: 5px;
 }
 
-main .task-list #list li .list-item-title img {
+main .task-list ul li .list-item-title img {
   transform: rotateX(180deg);
   cursor: pointer;
   text-align: center;
 }
 
-main .task-list #list li .list-item-title .reverse {
+main .task-list ul li .list-item-title .reverse {
   transform: none;
   text-align: center;
 }
 
-main .task-list #list li .list-item-description {
+main .task-list ul li .list-item-description {
   display: none;
 }
 
-main .task-list #list li .show {
+main .task-list ul li .show {
   display: block;
   text-align: center;
   padding-top: 10px;
   color: rgb(116, 115, 115);
+}
+
+main .task-list .connection-error {
+  display: none;
+}
+
+main .showError h3 {
+  display: block;
+  text-align: center;
+  padding: 50px;
 }
 
 footer {
