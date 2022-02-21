@@ -9,14 +9,14 @@ let tasks = [
   {
     id: 2,
     title: "Cook dinner",
-    date: '',
+    date: null,
     done: true,
     description: "Some description"
   },
   {
     id: 3,
     title: "Walk with dog",
-    date: new Date("02/19/2022"),
+    date: new Date("02/21/2022"),
     done: false,
     description: "Some description"
   },
@@ -30,7 +30,7 @@ let tasks = [
   {
     id: 5,
     title: "Help father",
-    date: new Date("02/20/2022"),
+    date: new Date("02/21/2022"),
     done: true,
     description: "Some description"
   }
@@ -46,17 +46,27 @@ const inputDate = taskForm.querySelector('input[name=due_date]');
 const addButton = taskForm.querySelector('button');
 
 function getFormatDate(taskDate) {
-  if (taskDate && taskDate !== '-') {
-    return taskDate.toISOString().slice(0, 10).split('-').reverse().join('/');
+  if (taskDate) {
+    const splitDate = taskDate.slice(0, 10).split('/');
+
+    const formatDate = splitDate.map(number => {
+      return number = number < 10 ? '0' + number : number;
+    })
+
+    return formatDate.join('/');
   } else {
     return '-';
   }
 }
 
 function isOverdue(taskDate) {
-  const currentDate = new Date();
-  const due_date = new Date(taskDate);
-  return currentDate >= due_date;
+  if (taskDate !== null) {
+    const currentDate = new Date().getDate();
+    const due_date = new Date(taskDate).getDate();
+    return currentDate > due_date;
+  } else {
+    return false;
+  }
 }
 
 function setListeners(taskElement) {
@@ -107,10 +117,11 @@ function renderTask({ id, title, date, description, done }) {
   const label = taskElement.querySelector('label');
   const span = taskElement.querySelector('span');
   const paragraph = taskElement.querySelector('p');
+  const due_date = date === null ? null : new Date(date).toLocaleDateString();
 
   checkButton.checked = done;
   label.textContent = title;
-  span.textContent = getFormatDate(date) ? getFormatDate(date) : '-';
+  span.textContent = getFormatDate(due_date) ? getFormatDate(due_date) : '-';
   paragraph.textContent = description ? description : '-';
   taskElement.setAttribute('id', id);
 
@@ -126,7 +137,7 @@ function renderTask({ id, title, date, description, done }) {
 }
 
 function appendTask(taskElement) {
-  list.append(taskElement);
+  list.prepend(taskElement);
 }
 
 inputTitle.addEventListener('focus', event => {
