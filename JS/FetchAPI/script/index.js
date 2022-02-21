@@ -20,11 +20,18 @@ const errorBlock = document.querySelector('.connection-error');
     list.classList.add('connection-error');
     errorBlock.classList.toggle('connection-error');
     console.log(err)
-  }));
+  })
+);
 
 function getFormatDate(taskDate) {
   if (taskDate) {
-    return taskDate.toISOString().slice(0, 10).split('-').reverse().join('/');
+    const splitDate = taskDate.slice(0, 10).split('/');
+
+    const formatDate = splitDate.map(number => {
+      return number = number < 10 ? '0' + number : number;
+    })
+
+    return formatDate.join('/');
   } else {
     return '-';
   }
@@ -32,12 +39,41 @@ function getFormatDate(taskDate) {
 
 function isOverdue(taskDate) {
   if (taskDate !== null) {
-    const currentDate = new Date();
-    const due_date = new Date(taskDate);
-    return currentDate >= due_date;
+    const currentDate = new Date().getDate();
+    const due_date = new Date(taskDate).getDate();
+    return currentDate > due_date;
   } else {
     return false;
   }
+}
+
+function renderTask({ id, title, due_date, description, done }) {
+  const taskElement = taskTemplate.content.cloneNode(true).children[0];
+  const checkButton = taskElement.querySelector('input[type=checkbox]')
+  const label = taskElement.querySelector('label');
+  const span = taskElement.querySelector('span');
+  const paragraph = taskElement.querySelector('p');
+  const date = due_date === null ? null : new Date(due_date).toLocaleDateString();
+
+  checkButton.checked = done;
+  label.textContent = title;
+  span.textContent = getFormatDate(date) ? getFormatDate(date) : '-';
+  paragraph.textContent = description ? description : '-';
+  taskElement.setAttribute('id', id);
+
+  if (done) {
+    label.classList.add('complete');
+  }
+
+  if (isOverdue(date)) {
+    span.classList.add('overdue');
+  }
+
+  return setListeners(taskElement);
+}
+
+function appendTask(taskElement) {
+  list.prepend(taskElement);
 }
 
 function setListeners(taskElement) {
@@ -106,35 +142,6 @@ function setListeners(taskElement) {
   return taskElement;
 }
 
-function renderTask({ id, title, due_date, description, done }) {
-  const taskElement = taskTemplate.content.cloneNode(true).children[0];
-  const checkButton = taskElement.querySelector('input[type=checkbox]')
-  const label = taskElement.querySelector('label');
-  const span = taskElement.querySelector('span');
-  const paragraph = taskElement.querySelector('p');
-  const date = due_date === null ? null : new Date(due_date);
-
-  checkButton.checked = done;
-  label.textContent = title;
-  span.textContent = getFormatDate(date) ? getFormatDate(date) : '-';
-  paragraph.textContent = description ? description : '-';
-  taskElement.setAttribute('id', id);
-
-  if (done) {
-    label.classList.add('complete');
-  }
-
-  if (isOverdue(date)) {
-    span.classList.add('overdue');
-  }
-
-  return setListeners(taskElement);
-}
-
-function appendTask(taskElement) {
-  list.prepend(taskElement);
-}
-
 inputTitle.addEventListener('focus', event => {
   event.target.classList.remove('valid');
   inputTitle.placeholder = 'Title';
@@ -165,9 +172,10 @@ taskForm.addEventListener('submit', event => {
       },
       body: JSON.stringify(formData)
     })
-      .then(() => {
-        appendTask(renderTask(formData))
-        taskForm.reset();
+      .then(response => response.json())
+      .then(task => {
+        appendTask(renderTask(task))
+        taskForm.reset()
       })
       .catch(err => {
         list.classList.add('connection-error');
