@@ -76,6 +76,25 @@ function appendTask(taskElement) {
   list.prepend(taskElement);
 }
 
+function deleteTaskAPI(currentTaskId) {
+  return fetch(tasksEndpoint + '/' + currentTaskId, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+}
+
+function checkedTaskAPI(currentTaskId, editTask) {
+  return fetch(tasksEndpoint + '/' + currentTaskId, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(editTask)
+  });
+}
+
 function setListeners(taskElement) {
   const arrowButton = taskElement.querySelector('img');
   const checkbox = taskElement.querySelector('.taskCheckbox');
@@ -93,13 +112,7 @@ function setListeners(taskElement) {
   checkbox.addEventListener('click', event => {
     const editTask = { done: event.target.checked };
 
-    fetch(tasksEndpoint + '/' + currentTaskId, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(editTask)
-    })
+    checkedTaskAPI(currentTaskId, editTask)
       .then(() => {
         if (event.target.checked) {
           taskLabel.classList.add('complete');
@@ -119,12 +132,7 @@ function setListeners(taskElement) {
   })
 
   deleteButton.addEventListener('click', () => {
-    fetch(tasksEndpoint + '/' + currentTaskId, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    deleteTaskAPI(currentTaskId)
       .then(() => taskElement.remove())
       .catch(err => {
         list.classList.add('connection-error');
@@ -147,6 +155,17 @@ inputTitle.addEventListener('focus', event => {
   inputTitle.placeholder = 'Title';
 })
 
+function createTaskAPI(formData) {
+  return fetch(tasksEndpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+    .then(response => response.json())
+}
+
 taskForm.addEventListener('submit', event => {
   event.preventDefault();
 
@@ -165,14 +184,7 @@ taskForm.addEventListener('submit', event => {
       description: getInputDescription
     }
 
-    fetch(tasksEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-      .then(response => response.json())
+    createTaskAPI(formData)
       .then(task => {
         appendTask(renderTask(task))
         taskForm.reset()

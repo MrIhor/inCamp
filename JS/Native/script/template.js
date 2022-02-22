@@ -16,7 +16,7 @@ let tasks = [
   {
     id: 3,
     title: "Walk with dog",
-    date: new Date("02/21/2022"),
+    date: new Date("02/22/2022"),
     done: false,
     description: "Some description"
   },
@@ -30,7 +30,7 @@ let tasks = [
   {
     id: 5,
     title: "Help father",
-    date: new Date("02/21/2022"),
+    date: new Date("02/22/2022"),
     done: true,
     description: "Some description"
   }
@@ -162,9 +162,8 @@ taskForm.addEventListener('submit', event => {
       done: false,
       description: inputDescription.value
     }
-    console.log(formData)
-    tasks.push(formData);
 
+    tasks.push(formData);
     appendTask(renderTask(formData));
     taskForm.reset();
   }

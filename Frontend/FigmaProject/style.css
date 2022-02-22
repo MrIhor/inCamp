@@ -173,6 +173,7 @@ main .skill-list .list-item p, .range {
 
 main .skill-list .list-item .range {
   display: flex;
+  background-color: #F5D6AB;
 }
 
 main .skill-list .list-item .range .range-progress {
@@ -364,6 +365,7 @@ footer .footer-container img {
 
   main .about .about-info p {
     font-size: 18px;
+    line-height: 30px;
   }
 
   main .skill-container .skill-content {
