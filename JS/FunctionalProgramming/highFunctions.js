@@ -1,7 +1,7 @@
 const allFigures = [
   {
     color: 'red',
-    width: 5,
+    width: 25,
     height: 5
   },
   {
@@ -16,8 +16,8 @@ const allFigures = [
   },
   {
     color: 'black',
-    width: 20,
-    height: 20
+    width: 40,
+    height: 40
   },
   {
     color: 'red',
@@ -30,12 +30,12 @@ const allFigures = [
     height: 10
   },
   {
-    color: 'blue',
+    color: 'red',
     width: 25,
     height: 15
   },
   {
-    color: 'blue',
+    color: 'red',
     width: 25,
     height: 15
   },
@@ -67,20 +67,40 @@ const all = (...predicates) => value => predicates.reduce((acc, func) => acc && 
 const any = (...predicates) => value => predicates.reduce((acc, func) => acc || func(value), false);
 
 const hasColor = color => figure => figure.color === color;
+const getArea = square => square.width * square.height;
+const getPerimeter = rectangle => (rectangle.width + rectangle.height) * 2;
+const getMax = (areas, initialValue) => Math.max(initialValue, areas);
+const getSum = (perimeter, initialValue) => perimeter + initialValue;
+
+
 const isSquare = figure => figure.width === figure.height;
+const isRectangle = figure => figure.width !== figure.height;
+
 const isBlack = hasColor("black");
-
-
-const square = filter(and(isSquare, isBlack))(allFigures);
-// const square = map(and(hasColor('black'), isSquare))(allFigures);
-
-console.log(square);
-
 const isRed = hasColor("red");
 
+// get max square area
+const blackSquares = figures => filter(and(isSquare, isBlack))(figures);
+const squareAreas = squares => map(getArea)(squares);
+const maxArea = areas => reduce(0, getMax)(areas)
 
-const result = flow(
-  filter(isRed)
+const maxSquareArea = flow(
+  blackSquares,
+  squareAreas,
+  maxArea
 )(allFigures)
 
-// console.log(result)
+console.log('Max square area:', maxSquareArea);
+
+// get sum of rectangles perimeter
+const redRectangles = figures => filter(and(isRectangle, isRed))(figures);
+const rectanglePerimeters = rectangles => map(getPerimeter)(rectangles);
+const sumPerimeters = perimeters => reduce(0, getSum)(perimeters);
+
+const sumOfRectanglePerimeters = compose(
+  sumPerimeters,
+  rectanglePerimeters,
+  redRectangles
+)(allFigures)
+
+console.log('Sum of rectangle perimeters:', sumOfRectanglePerimeters);
