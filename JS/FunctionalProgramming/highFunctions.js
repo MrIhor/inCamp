@@ -54,7 +54,7 @@ const allFigures = [
 // map, filter, reduce
 const map = (func, context) => array => array.map(func, context);
 const filter = func => array => array.filter(func);
-const reduce = (initialValue, func) => array => array.reduce(func, initialValue);
+const reduce = (func, initialValue) => array => array.reduce(func, initialValue);
 
 // flow, compose
 const flow = (...funcs) => initialValue => funcs.reduce((acc, func) => func(acc), initialValue);
@@ -69,8 +69,8 @@ const any = (...predicates) => value => predicates.reduce((acc, func) => acc || 
 const hasColor = color => figure => figure.color === color;
 const getArea = square => square.width * square.height;
 const getPerimeter = rectangle => (rectangle.width + rectangle.height) * 2;
-const getMax = (areas, initialValue) => Math.max(initialValue, areas);
-const getSum = (perimeter, initialValue) => perimeter + initialValue;
+const getMax = (a, b) => Math.max(a, b);
+const getSum = (a, b) => a + b;
 
 
 const isSquare = figure => figure.width === figure.height;
@@ -79,28 +79,18 @@ const isRectangle = figure => figure.width !== figure.height;
 const isBlack = hasColor("black");
 const isRed = hasColor("red");
 
-// get max square area
-const blackSquares = figures => filter(and(isSquare, isBlack))(figures);
-const squareAreas = squares => map(getArea)(squares);
-const maxArea = areas => reduce(0, getMax)(areas)
-
 const maxSquareArea = flow(
-  blackSquares,
-  squareAreas,
-  maxArea
+  filter(and(isSquare, isBlack)),
+  map(getArea),
+  reduce(0, getMax)
 )(allFigures)
 
 console.log('Max square area:', maxSquareArea);
 
-// get sum of rectangles perimeter
-const redRectangles = figures => filter(and(isRectangle, isRed))(figures);
-const rectanglePerimeters = rectangles => map(getPerimeter)(rectangles);
-const sumPerimeters = perimeters => reduce(0, getSum)(perimeters);
-
-const sumOfRectanglePerimeters = compose(
-  sumPerimeters,
-  rectanglePerimeters,
-  redRectangles
+const sumOfRectanglePerimeters = flow(
+  filter(and(isRectangle, isRed)),
+  map(getPerimeter),
+  reduce(0, getSum)
 )(allFigures)
 
 console.log('Sum of rectangle perimeters:', sumOfRectanglePerimeters);
