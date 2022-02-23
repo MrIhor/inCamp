@@ -1,5 +1,7 @@
 .sidebar {
-  padding: 15px 10px;
+  width: 20%;
+  height: 100%;
+  padding: 15px 50px;
   text-align: center;
 }
 

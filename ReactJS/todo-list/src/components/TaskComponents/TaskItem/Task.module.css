@@ -1,6 +1,9 @@
 .task {
   display: flex;
   flex-direction: column;
+}
+
+.task > * {
   height: 50px;
 }
 
@@ -14,9 +17,12 @@
   text-align: center;
 }
 
-.task_item img {
-  transform: rotateX(180deg);
+.task_item button, img {
   cursor: pointer;
+}
+
+.task_item .arrow {
+  transform: rotateX(180deg);
   text-align: center;
 }
 
@@ -27,7 +33,6 @@
 }
 
 .delete {
-  cursor: pointer;
   height: 65%;
   width: 50%;
   background-color: #e94757;
@@ -39,7 +44,6 @@
 }
 
 .description {
-  display: block;
   text-align: center;
   padding-top: 10px;
   color: rgb(116, 115, 115);

@@ -1,0 +1,42 @@
+.form_container {
+  margin-top: 100px;
+}
+
+.form_container form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  border-bottom: 2px solid black;
+}
+
+.form_container form input[type='text'] {
+  font-size: 24px;
+  padding: 15px;
+  margin-top: 5px;
+}
+
+.form_container form input[type='date'] {
+  width: 50%;
+  margin: 0 auto;
+  font-size: 20px;
+  padding-top: 5px;
+}
+
+.form_container form label {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.form_container form label[name='taskDate'] {
+  text-align: center;
+}
+
+.form_container form button {
+  width: 20%;
+  height: 20%;
+  padding: 10px;
+  margin: 20px;
+  background: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
+}

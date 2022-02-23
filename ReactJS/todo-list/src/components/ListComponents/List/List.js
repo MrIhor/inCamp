@@ -1,9 +1,9 @@
 import styles from './List.module.css';
 
-function List({ title }) {
+function List({ title, getTasks, id, selectedList }) {
   return (
     <li className={styles.list_item}>
-      <h3>{title}</h3>
+      <h3 onClick={() => getTasks(selectedList, id)}>{title}</h3>
     </li>
   )
 }

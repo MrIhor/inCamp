@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import styles from './Task.module.css';
 import image from '../../../../src/img/arrow.png'
 
 function Task({ task }) {
+  const [stateDescription, setStateDescriprition] = useState(false);
+
   return (
     <li className={styles.task}>
       <div className={styles.task_item}>
@@ -9,12 +12,23 @@ function Task({ task }) {
         <h3>{task.title}</h3>
         <span>{task.date}</span>
         <div><button className={styles.delete}><span>Delete</span></button></div>
-        <div><img src={image} alt="arrow" /></div>
+        <div><img
+          className={stateDescription ? styles.reverse_arrow : styles.arrow}
+          src={image}
+          alt="arrow"
+          onClick={() => setStateDescriprition(!stateDescription)}
+        />
+        </div>
       </div>
 
-      <div className={styles.description}>
-        <p>{task.description}</p>
-      </div>
+      {
+        stateDescription ?
+          <div className={styles.description}>
+            <p>{task.description}</p>
+          </div>
+          :
+          null
+      }
     </li>
   )
 }
