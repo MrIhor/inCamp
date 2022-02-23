@@ -1,0 +1,11 @@
+.task_container {
+  padding: 15px 10px;
+  text-align: center;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 25px 0;
+}

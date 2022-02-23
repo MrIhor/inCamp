@@ -1,0 +1,46 @@
+.task {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+}
+
+.task_item {
+  display: flex;
+  align-items: center;
+}
+
+.task_item > * {
+  flex-basis: 25%;
+  text-align: center;
+}
+
+.task_item img {
+  transform: rotateX(180deg);
+  cursor: pointer;
+  text-align: center;
+}
+
+.checkbox {
+  cursor: pointer;
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.delete {
+  cursor: pointer;
+  height: 65%;
+  width: 50%;
+  background-color: #e94757;
+  border-radius: 10px;
+}
+
+.delete:hover {
+  border-radius: 5px;
+}
+
+.description {
+  display: block;
+  text-align: center;
+  padding-top: 10px;
+  color: rgb(116, 115, 115);
+}
