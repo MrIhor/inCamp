@@ -1,7 +1,7 @@
 import List from '../List/List';
 import styles from './TodoListSidebar.module.css';
 
-function TodoListSidebar({ todoLists, selectedList }) {
+function TodoListSidebar({ todoLists, onSelect }) {
 
   return (
     <div className={styles.sidebar}>
@@ -11,9 +11,8 @@ function TodoListSidebar({ todoLists, selectedList }) {
           todoLists.map(list => (
             <List
               key={list.id}
-              id={list.id}
-              title={list.title}
-              selectedList={selectedList}
+              list={list}
+              getTasksList={onSelect}
             />
           ))
         }
