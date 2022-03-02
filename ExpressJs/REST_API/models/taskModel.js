@@ -1,7 +1,6 @@
 const lists = require('../List/ListTasks.json');
 
 const taskInc = (init = 2) => () => ++init;
-const generateTaskId = taskInc();
 
 function getId(array, currentId) {
     return array.find(element => element.id === currentId)
@@ -10,7 +9,7 @@ function getId(array, currentId) {
 const getTask = id => {
     const listId = getId(lists, id);
 
-    if(listId) {
+    if (listId) {
         return listId.tasks;
     }
 
@@ -22,7 +21,7 @@ const createTask = (listId, data) => {
 
     const task = {
         id: currentList.tasks.length + 1,
-        title: data.title, 
+        title: data.title,
         done: false
     }
 
@@ -30,7 +29,7 @@ const createTask = (listId, data) => {
         currentList.tasks.push(task);
         return currentList.tasks;
     }
-     
+
     return undefined;
 }
 
@@ -44,18 +43,18 @@ const deleteTask = (listId, taskId) => {
             const deleteTask = currentList.tasks.filter(element => element.id !== taskId);
             return currentList.tasks = deleteTask;
         }
-         
+
         return undefined;
     }
-     
+
     return undefined;
 }
 
 const updateTask = (listId, taskId, data) => {
-    const currentList = getId(lists, listId).tasks; 
+    const currentList = getId(lists, listId).tasks;
     const task = getId(currentList, taskId);
 
-    if(task) {
+    if (task) {
         task.taskTitle = data.title;
         task.done = data.done;
         return task;
@@ -67,8 +66,8 @@ const updateTask = (listId, taskId, data) => {
 const updateFullTask = (listId, taskId, data) => {
     const currentList = getId(lists, listId).tasks;
     const task = getId(currentList, taskId);
-    
-    if(task) {
+
+    if (task) {
         const updatedTask = {
             id: currentList.length,
             taskTitle: data.title,
@@ -82,4 +81,4 @@ const updateFullTask = (listId, taskId, data) => {
     return undefined;
 }
 
-module.exports = {getTask, createTask, deleteTask, updateTask, updateFullTask};
+module.exports = { getTask, createTask, deleteTask, updateTask, updateFullTask };
