@@ -1,6 +1,6 @@
 import styles from './TaskForm.module.css';
 
-function TaskForm(props) {
+function TaskForm({ onSubmit }) {
   return (
     <div className={styles.form_container}>
       <form name="createTask">
@@ -10,7 +10,7 @@ function TaskForm(props) {
         <input type="text" name="description" placeholder="Description" />
         <label name="taskDate">Due date</label>
         <input type="date" name="due_date" />
-        <div><button type="submit"><span>Add Task</span></button></div>
+        <div><button onSubmit={() => onSubmit} type="submit"><span>Add Task</span></button></div>
       </form>
     </div>
   )
