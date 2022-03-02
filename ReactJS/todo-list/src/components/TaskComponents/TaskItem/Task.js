@@ -9,7 +9,7 @@ function Task({ task }) {
     <li className={styles.task}>
       <div className={styles.task_item}>
         <div><input type="checkbox" className={styles.checkbox} /></div>
-        <h3>{task.title}</h3>
+        <h3>{task.name}</h3>
         <span>{task.date}</span>
         <div><button className={styles.delete}><span>Delete</span></button></div>
         <div><img

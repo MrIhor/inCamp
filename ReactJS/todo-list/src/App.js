@@ -58,7 +58,7 @@ const todoLists = [
     tasks: [
       {
         id: 1,
-        title: "Walk with dog",
+        name: "Walk with dog",
         date: "02/22/2022",
         done: false,
         description: "Some description"
@@ -75,12 +75,17 @@ const todoLists = [
 ]
 
 function App() {
-  const [selectedList, setSelectedList] = useState(todoLists);
+  const [selectedList, setSelectedList] = useState({});
 
-  // const selectTodoList = (id) => {
+  const selectTodoList = (id) => {
+    const currentList = todoLists.filter(list => list.id === id);
+    setSelectedList(currentList[0]);
+  }
 
-  //   console.log('test');
-  // }
+  const addTask = (event) => {
+    event.preventDefault();
+    console.log('addTask');
+  }
 
   return (
     <div className={styles.App}>
@@ -91,17 +96,21 @@ function App() {
       <main className={styles.main}>
         <TodoListSidebar
           todoLists={todoLists}
-          selectedList={selectedList}
-        // onSelect={selectTodoList}
+          onSelect={selectTodoList}
         />
         <div className={styles.content}>
           <h2>Tasks</h2>
           {
-            // selectedList.tasks.map(taskElement => (
-            //   <Task key={taskElement.id} task={taskElement} />
-            // ))
+            selectedList.tasks === undefined ?
+              <h3>Choose list</h3>
+              :
+              selectedList.tasks.map(taskElement => (
+                <Task key={taskElement.id} task={taskElement} />
+              ))
           }
-          <TaskForm />
+          <TaskForm
+            onSubmit={addTask}
+          />
         </div>
       </main>
 
