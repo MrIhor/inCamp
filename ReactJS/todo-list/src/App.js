@@ -74,17 +74,33 @@ const todoLists = [
   }
 ]
 
+let taskId = 4;
+
 function App() {
   const [selectedList, setSelectedList] = useState({});
 
-  const selectTodoList = (id) => {
-    const currentList = todoLists.filter(list => list.id === id);
-    setSelectedList(currentList[0]);
+  const selectTodoList = (list) => {
+    setSelectedList(list);
   }
 
-  const addTask = (event) => {
-    event.preventDefault();
+  const addTask = (formData) => {
+    const newTask = {
+      id: taskId,
+      name: formData.title,
+      date: formData.due_date,
+      done: false,
+      description: formData.description
+    }
+
+    const listTasks = [...selectedList.tasks, newTask];
+
+    setSelectedList({
+      ...selectedList,
+      tasks: listTasks
+    });
     console.log('addTask');
+    console.log(selectedList);
+    taskId++;
   }
 
   return (
@@ -96,6 +112,7 @@ function App() {
       <main className={styles.main}>
         <TodoListSidebar
           todoLists={todoLists}
+          selectedList={selectedList}
           onSelect={selectTodoList}
         />
         <div className={styles.content}>

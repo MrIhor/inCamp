@@ -1,7 +1,7 @@
 import List from '../List/List';
 import styles from './TodoListSidebar.module.css';
 
-function TodoListSidebar({ todoLists, onSelect }) {
+function TodoListSidebar({ todoLists, selectedList, onSelect }) {
 
   return (
     <div className={styles.sidebar}>
@@ -12,6 +12,7 @@ function TodoListSidebar({ todoLists, onSelect }) {
             <List
               key={list.id}
               list={list}
+              currentList={selectedList}
               getTasksList={onSelect}
             />
           ))
